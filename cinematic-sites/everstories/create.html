@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Begin Your Story — EverStories</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0B0B0C;
+      --ivory: #F5F1E8;
+      --gold: #C6A96B;
+      --gold-dim: rgba(198,169,107,0.12);
+      --grey: #7A7A7A;
+      --border: rgba(245,241,232,0.1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--ivory);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      min-height: 100dvh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .nav-logo img { width: 28px; height: 28px; }
+
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--ivory);
+    }
+
+    .nav-secure {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grey);
+    }
+
+    .nav-secure svg { stroke: var(--gold); fill: none; stroke-width: 1.5; }
+
+    /* ── PROGRESS ── */
+    .progress-bar {
+      padding: 0 3rem;
+      padding-top: 2rem;
+      padding-bottom: 0;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .progress-steps {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 3rem;
+    }
+
+    .progress-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      flex: 1;
+      position: relative;
+    }
+
+    .progress-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 14px;
+      left: calc(50% + 14px);
+      right: calc(-50% + 14px);
+      height: 1px;
+      background: var(--border);
+      transition: background 0.4s;
+    }
+
+    .progress-step.done:not(:last-child)::after,
+    .progress-step.active:not(:last-child)::after {
+      background: rgba(198,169,107,0.3);
+    }
+
+    .step-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      color: var(--grey);
+      transition: all 0.3s;
+      background: var(--black);
+      z-index: 1;
+    }
+
+    .progress-step.active .step-dot {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: var(--gold-dim);
+    }
+
+    .progress-step.done .step-dot {
+      border-color: var(--gold);
+      background: var(--gold);
+      color: var(--black);
+    }
+
+    .step-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grey);
+      white-space: nowrap;
+      transition: color 0.3s;
+    }
+
+    .progress-step.active .step-label { color: var(--ivory); }
+    .progress-step.done .step-label { color: rgba(198,169,107,0.7); }
+
+    /* ── FUNNEL LAYOUT ── */
+    .funnel-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 3rem 6rem;
+    }
+
+    .step-panel {
+      display: none;
+      animation: fadeUp 0.4s ease forwards;
+    }
+
+    .step-panel.active { display: block; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .step-heading {
+      margin-bottom: 2.5rem;
+    }
+
+    .step-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .step-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 2.75rem);
+      font-weight: 300;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+
+    .step-sub {
+      font-size: 0.88rem;
+      color: rgba(245,241,232,0.5);
+      margin-top: 0.75rem;
+      line-height: 1.7;
+      max-width: 52ch;
+    }
+
+    /* ── TIER CARDS ── */
+    .tier-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px;
+      background: rgba(198,169,107,0.1);
+      margin-bottom: 2rem;
+    }
+
+    .tier-card {
+      background: #0d0d0e;
+      padding: 2.5rem 2rem 3rem;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.25s;
+      border: 2px solid transparent;
+      --x: 50%; --y: 50%;
+    }
+
+    .tier-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(240px circle at var(--x) var(--y), rgba(198,169,107,0.1), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .tier-card:hover::before { opacity: 1; }
+
+    .tier-card.selected {
+      background: #111009;
+      border-color: var(--gold);
+    }
+
+    .tier-badge {
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(198,169,107,0.3);
+      padding: 0.25rem 0.6rem;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+    }
+
+    .tier-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .tier-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+      line-height: 1;
+    }
+
+    .tier-desc {
+      font-size: 0.8rem;
+      color: rgba(245,241,232,0.5);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+
+    .tier-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .tier-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.78rem;
+      color: rgba(245,241,232,0.6);
+      line-height: 1.5;
+    }
+
+    .tier-features svg { flex-shrink: 0; margin-top: 0.15rem; }
+
+    .tier-selected-check {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--gold);
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tier-card.selected .tier-selected-check { display: flex; }
+
+    /* ── FORM FIELDS ── */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem 2rem;
+    }
+
+    .form-grid.single { grid-template-columns: 1fr; }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(245,241,232,0.5);
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      background: rgba(245,241,232,0.04);
+      border: 1px solid rgba(245,241,232,0.12);
+      color: var(--ivory);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 300;
+      padding: 0.85rem 1rem;
+      outline: none;
+      transition: border-color 0.25s, background 0.25s;
+      width: 100%;
+      border-radius: 0;
+      appearance: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: rgba(198,169,107,0.5);
+      background: rgba(198,169,107,0.04);
+    }
+
+    input::placeholder, textarea::placeholder { color: rgba(245,241,232,0.25); }
+
+    textarea { resize: vertical; min-height: 120px; }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237A7A7A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+
+    select option { background: #1a1a1b; color: var(--ivory); }
+
+    .field-hint {
+      font-size: 0.7rem;
+      color: rgba(245,241,232,0.3);
+      line-height: 1.5;
+    }
+
+    /* ── PHOTO UPLOAD ── */
+    .upload-zone {
+      border: 1px dashed rgba(198,169,107,0.3);
+      padding: 4rem 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.25s, background 0.25s;
+      position: relative;
+    }
+
+    .upload-zone:hover, .upload-zone.dragover {
+      border-color: var(--gold);
+      background: var(--gold-dim);
+    }
+
+    .upload-zone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .upload-icon {
+      width: 40px;
+      height: 40px;
+      stroke: var(--gold);
+      fill: none;
+      stroke-width: 1.25;
+      margin: 0 auto 1rem;
+      display: block;
+    }
+
+    .upload-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+    }
+
+    .upload-sub {
+      font-size: 0.78rem;
+      color: rgba(245,241,232,0.4);
+      line-height: 1.6;
+    }
+
+    .upload-previews {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .preview-thumb {
+      aspect-ratio: 1;
+      object-fit: cover;
+      width: 100%;
+      border: 1px solid rgba(198,169,107,0.2);
+    }
+
+    /* ── MESSAGE STYLES ── */
+    .occasion-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .occasion-btn {
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: rgba(245,241,232,0.55);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .occasion-btn:hover { border-color: rgba(198,169,107,0.4); color: var(--ivory); }
+    .occasion-btn.selected { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+
+    /* ── REVIEW SUMMARY ── */
+    .review-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+    }
+
+    .review-section {
+      padding-bottom: 1.75rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.75rem;
+    }
+
+    .review-section:last-child { border-bottom: none; margin-bottom: 0; }
+
+    .review-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .review-value {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: rgba(245,241,232,0.75);
+    }
+
+    .review-value strong {
+      font-weight: 500;
+      color: var(--ivory);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .order-summary {
+      background: rgba(245,241,232,0.03);
+      border: 1px solid var(--border);
+      padding: 2rem;
+    }
+
+    .order-summary-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .order-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.75rem;
+      font-size: 0.85rem;
+    }
+
+    .order-line span:first-child { color: rgba(245,241,232,0.6); }
+    .order-line span:last-child { color: var(--ivory); }
+
+    .order-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-top: 1rem;
+      margin-top: 0.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .order-total span:first-child {
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(245,241,232,0.5);
+    }
+
+    .order-total span:last-child {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--gold);
+    }
+
+    /* ── NAV BUTTONS ── */
+    .step-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      border: none;
+      color: rgba(245,241,232,0.4);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.2s;
+    }
+
+    .btn-back:hover { color: var(--ivory); }
+
+    .btn-next {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.9rem 2.5rem;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-next:hover { background: #d4b87a; }
+    .btn-next:active { transform: scale(0.98); }
+    .btn-next:disabled { background: rgba(198,169,107,0.3); cursor: not-allowed; transform: none; }
+
+    .error-msg {
+      font-size: 0.75rem;
+      color: #e07070;
+      margin-top: 0.4rem;
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .progress-bar, .funnel-wrap { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .step-label { display: none; }
+      .tier-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-grid .field.full { grid-column: 1; }
+      .occasion-grid { grid-template-columns: repeat(2, 1fr); }
+      .review-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="assets/logo-tree.svg" alt="EverStories">
+    <span class="nav-brand">EverStories</span>
+  </a>
+  <div class="nav-secure">
+    <svg width="14" height="14" viewBox="0 0 14 14">
+      <rect x="2" y="6" width="10" height="7" rx="1"/>
+      <path d="M4 6V4a3 3 0 016 0v2"/>
+    </svg>
+    Secure Order
+  </div>
+</nav>
+
+<div class="progress-bar">
+  <div class="progress-steps" id="progressSteps">
+    <div class="progress-step active" data-step="1">
+      <div class="step-dot">1</div>
+      <span class="step-label">Package</span>
+    </div>
+    <div class="progress-step" data-step="2">
+      <div class="step-dot">2</div>
+      <span class="step-label">Occasion</span>
+    </div>
+    <div class="progress-step" data-step="3">
+      <div class="step-dot">3</div>
+      <span class="step-label">Photos</span>
+    </div>
+    <div class="progress-step" data-step="4">
+      <div class="step-dot">4</div>
+      <span class="step-label">Message</span>
+    </div>
+    <div class="progress-step" data-step="5">
+      <div class="step-dot">5</div>
+      <span class="step-label">Delivery</span>
+    </div>
+    <div class="progress-step" data-step="6">
+      <div class="step-dot">6</div>
+      <span class="step-label">Review</span>
+    </div>
+  </div>
+</div>
+
+<div class="funnel-wrap">
+
+  <!-- STEP 1: Choose Package -->
+  <div class="step-panel active" id="step1">
+    <div class="step-heading">
+      <p class="step-eyebrow">Step 1 of 6</p>
+      <h1 class="step-title">Choose your gift</h1>
+      <p class="step-sub">Each package includes a custom cinematic memory film crafted from your photos.</p>
+    </div>
+
+    <div class="tier-grid">
+      <div class="tier-card" data-tier="card" data-price="150">
+        <div class="tier-selected-check">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#0B0B0C" stroke-width="2">
+            <path d="M2 6l3 3 5-5"/>
+          </svg>
+        </div>
+        <span class="tier-badge">Entry</span>
+        <h3 class="tier-name">Story Card</h3>
+        <div class="tier-price">$150</div>
+        <p class="tier-desc">A premium printed card with QR code — scan to watch your living memory film on any device.</p>
+        <ul class="tier-features">
+          <li>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
+            Memory film up to 45 seconds
+          </li>
+          <li>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
+            Luxury matte black printed card
+          </li>
+          <li>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
+            Gold foil EverStories envelope
+          </li>
+          <li>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
+            Permanent hosted memory link
+          </li>
+        </ul>
+      </div>
+
+      <div class="tier-card selected" data-tier="keepsake" data-price="250">
+        <div class="tier-selected-check">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#0B0B0C" stroke-width="2">
+            <path d="M2 6l3 3 5-5"/>
+          </svg>
+        </div>
+        <span class="tier-badge">Most Popular</span>
+        <h3 class="tier-name">Keepsake Collection</h3>
+        <div class="tier-price">$250</div>
+        <p class="tier-desc">The complete experience. Memory film pre-loaded on a digital frame, presented in our signature keepsake box.</p>
+        <ul class="tier-features">
+          <li>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
+            Memory film up to 60 seconds
+          </li>
+          <li>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
+            Pre-loaded digital picture frame
+          </li>
+          <li>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
+            Luxury keepsake box, black velvet interior
+          </li>
+          <li>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
+            Handwritten gift card + free shipping
+          </li>
+        </ul>
+      </div>
+
+      <div class="tier-card" data-tier="frame" data-price="350">
+        <div class="tier-selected-check">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#0B0B0C" stroke-width="2">
+            <path d="M2 6l3 3 5-5"/>
+          </svg>
+        </div>
+        <span class="tier-badge">Premium</span>
+        <h3 class="tier-name">Living Story Frame</h3>
+        <div class="tier-price">$350</div>
+        <p class="tier-desc">Our most complete gift. Large gallery-format frame, extended memory film, engraved nameplate, and white glove delivery.</p>
+        <ul class="tier-features">
+          <li>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
+            Extended film up to 3 minutes
+          </li>
+          <li>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
+            Large gallery-format digital frame
+          </li>
+          <li>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
+            Engraved nameplate on frame
+          </li>
+          <li>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
+            Premium keepsake box + white glove delivery
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-nav">
+      <a href="index.html" class="btn-back">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 7H4M6 4L3 7l3 3"/></svg>
+        Back to Home
+      </a>
+      <button class="btn-next" onclick="goNext()">
+        Continue
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h6M8 4l3 3-3 3"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- STEP 2: Occasion & Recipient -->
+  <div class="step-panel" id="step2">
+    <div class="step-heading">
+      <p class="step-eyebrow">Step 2 of 6</p>
+      <h1 class="step-title">What's the occasion?</h1>
+      <p class="step-sub">Tell us about the person and moment this gift is for. This helps us craft a more personal experience.</p>
+    </div>
+
+    <div class="occasion-grid">
+      <button class="occasion-btn selected" data-occasion="Anniversary">Anniversary</button>
+      <button class="occasion-btn" data-occasion="Birthday">Birthday</button>
+      <button class="occasion-btn" data-occasion="Mother's Day">Mother's Day</button>
+      <button class="occasion-btn" data-occasion="Father's Day">Father's Day</button>
+      <button class="occasion-btn" data-occasion="Memorial">In Memory Of</button>
+      <button class="occasion-btn" data-occasion="Other">Other</button>
+    </div>
+
+    <div class="form-grid" style="margin-top: 2rem;">
+      <div class="field">
+        <label>Recipient's First Name</label>
+        <input type="text" id="recipientName" placeholder="Margaret">
+      </div>
+      <div class="field">
+        <label>Your Name</label>
+        <input type="text" id="senderName" placeholder="Your name">
+      </div>
+      <div class="field">
+        <label>Your Relationship to Recipient</label>
+        <select id="relationship">
+          <option value="">Select relationship</option>
+          <option>Son / Daughter</option>
+          <option>Spouse / Partner</option>
+          <option>Parent</option>
+          <option>Sibling</option>
+          <option>Friend</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Delivery Date Needed By</label>
+        <input type="text" id="deliveryDate" placeholder="e.g. May 12, 2025">
+      </div>
+    </div>
+
+    <div class="step-nav">
+      <button class="btn-back" onclick="goBack()">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 7H4M6 4L3 7l3 3"/></svg>
+        Back
+      </button>
+      <button class="btn-next" onclick="goNext()">
+        Continue
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h6M8 4l3 3-3 3"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- STEP 3: Photo Upload -->
+  <div class="step-panel" id="step3">
+    <div class="step-heading">
+      <p class="step-eyebrow">Step 3 of 6</p>
+      <h1 class="step-title">Upload your photos</h1>
+      <p class="step-sub">Share up to 20 photos. Old or new, black and white or colour — we'll bring them to life. The more you share, the richer the story.</p>
+    </div>
+
+    <div class="upload-zone" id="uploadZone">
+      <input type="file" id="photoInput" multiple accept="image/*">
+      <svg class="upload-icon" viewBox="0 0 40 40">
+        <path d="M20 28V12M13 19l7-7 7 7"/>
+        <path d="M8 32h24"/>
+        <rect x="4" y="4" width="32" height="32" rx="2" stroke-dasharray="4 2"/>
+      </svg>
+      <p class="upload-title">Drop your photos here</p>
+      <p class="upload-sub">or click to browse your files<br>JPG, PNG, HEIC — up to 20 photos, max 10MB each</p>
+    </div>
+    <div class="upload-previews" id="uploadPreviews"></div>
+
+    <div class="step-nav">
+      <button class="btn-back" onclick="goBack()">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 7H4M6 4L3 7l3 3"/></svg>
+        Back
+      </button>
+      <button class="btn-next" onclick="goNext()">
+        Continue
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h6M8 4l3 3-3 3"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- STEP 4: Personal Message -->
+  <div class="step-panel" id="step4">
+    <div class="step-heading">
+      <p class="step-eyebrow">Step 4 of 6</p>
+      <h1 class="step-title">Add a personal message</h1>
+      <p class="step-sub">This message will be included as a handwritten gift card inside the keepsake box. Take your time — it will mean everything.</p>
+    </div>
+
+    <div class="form-grid single">
+      <div class="field">
+        <label>Your Message</label>
+        <textarea id="giftMessage" placeholder="Write something from the heart..." style="min-height: 180px;"></textarea>
+        <span class="field-hint">This will be hand-transcribed onto a premium EverStories gift card. Approx. 200 words max.</span>
+      </div>
+      <div class="field">
+        <label>Story Context (Optional)</label>
+        <textarea id="storyContext" placeholder="Tell us about the photos — who is in them, when they were taken, what made this moment special..."></textarea>
+        <span class="field-hint">This helps our team craft a more meaningful memory film. The more context, the better.</span>
+      </div>
+    </div>
+
+    <div class="step-nav">
+      <button class="btn-back" onclick="goBack()">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 7H4M6 4L3 7l3 3"/></svg>
+        Back
+      </button>
+      <button class="btn-next" onclick="goNext()">
+        Continue
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h6M8 4l3 3-3 3"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- STEP 5: Delivery Info -->
+  <div class="step-panel" id="step5">
+    <div class="step-heading">
+      <p class="step-eyebrow">Step 5 of 6</p>
+      <h1 class="step-title">Delivery details</h1>
+      <p class="step-sub">Where should we send your gift? We ship across Canada with free shipping on all orders over $200.</p>
+    </div>
+
+    <div class="form-grid">
+      <div class="field">
+        <label>Recipient First Name</label>
+        <input type="text" id="shipFirst" placeholder="Margaret">
+      </div>
+      <div class="field">
+        <label>Recipient Last Name</label>
+        <input type="text" id="shipLast" placeholder="O'Brien">
+      </div>
+      <div class="field full">
+        <label>Street Address</label>
+        <input type="text" id="shipAddress" placeholder="123 Elm Street">
+      </div>
+      <div class="field">
+        <label>City</label>
+        <input type="text" id="shipCity" placeholder="Ottawa">
+      </div>
+      <div class="field">
+        <label>Province</label>
+        <select id="shipProvince">
+          <option value="">Select province</option>
+          <option>Ontario</option>
+          <option>British Columbia</option>
+          <option>Quebec</option>
+          <option>Alberta</option>
+          <option>Manitoba</option>
+          <option>Saskatchewan</option>
+          <option>Nova Scotia</option>
+          <option>New Brunswick</option>
+          <option>Newfoundland & Labrador</option>
+          <option>Prince Edward Island</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Postal Code</label>
+        <input type="text" id="shipPostal" placeholder="K1A 0A9">
+      </div>
+      <div class="field full">
+        <label>Delivery Instructions (Optional)</label>
+        <input type="text" id="shipNote" placeholder="Leave at door, call upon arrival, etc.">
+      </div>
+      <div class="field full">
+        <label>Your Email Address</label>
+        <input type="email" id="orderEmail" placeholder="you@email.com">
+        <span class="field-hint">We'll send your order confirmation and production updates here.</span>
+      </div>
+    </div>
+
+    <div class="step-nav">
+      <button class="btn-back" onclick="goBack()">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 7H4M6 4L3 7l3 3"/></svg>
+        Back
+      </button>
+      <button class="btn-next" onclick="goNext()">
+        Review Order
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h6M8 4l3 3-3 3"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- STEP 6: Review -->
+  <div class="step-panel" id="step6">
+    <div class="step-heading">
+      <p class="step-eyebrow">Step 6 of 6</p>
+      <h1 class="step-title">Review your order</h1>
+      <p class="step-sub">Everything look right? Once you proceed to payment, our team will begin crafting your memory.</p>
+    </div>
+
+    <div class="review-grid">
+      <div>
+        <div class="review-section">
+          <p class="review-label">Package</p>
+          <div class="review-value">
+            <strong id="reviewTier">Keepsake Collection</strong>
+            Custom cinematic memory film, pre-loaded digital frame, luxury keepsake box
+          </div>
+        </div>
+        <div class="review-section">
+          <p class="review-label">Occasion</p>
+          <div class="review-value">
+            <strong id="reviewOccasion">Anniversary</strong>
+            <span id="reviewRecipient"></span>
+          </div>
+        </div>
+        <div class="review-section">
+          <p class="review-label">Delivery</p>
+          <div class="review-value" id="reviewDelivery">
+            —
+          </div>
+        </div>
+        <div class="review-section">
+          <p class="review-label">Photos</p>
+          <div class="review-value" id="reviewPhotos">0 photos uploaded</div>
+        </div>
+        <div class="review-section">
+          <p class="review-label">Gift Message</p>
+          <div class="review-value" id="reviewMessage" style="font-style: italic; color: rgba(245,241,232,0.5)">—</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="order-summary">
+          <p class="order-summary-title">Order Summary</p>
+          <div class="order-line">
+            <span id="summaryTierName">Keepsake Collection</span>
+            <span id="summaryPrice">$250</span>
+          </div>
+          <div class="order-line">
+            <span>Shipping</span>
+            <span id="summaryShipping">Free</span>
+          </div>
+          <div class="order-line">
+            <span>HST (13%)</span>
+            <span id="summaryTax">$32.50</span>
+          </div>
+          <div class="order-total">
+            <span>Total</span>
+            <span id="summaryTotal">$282.50</span>
+          </div>
+          <a href="checkout.html" class="btn-next" style="width:100%; justify-content:center; margin-top: 1.5rem; text-decoration:none;" id="proceedBtn">
+            Proceed to Payment
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h6M8 4l3 3-3 3"/></svg>
+          </a>
+          <p style="font-size: 0.68rem; color: var(--grey); text-align: center; margin-top: 1rem; line-height: 1.6;">
+            SSL encrypted · Apple Pay · Google Pay · Visa · Mastercard
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-nav">
+      <button class="btn-back" onclick="goBack()">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 7H4M6 4L3 7l3 3"/></svg>
+        Back
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  let currentStep = 1;
+  const totalSteps = 6;
+
+  const state = {
+    tier: 'keepsake',
+    price: 250,
+    occasion: 'Anniversary',
+    photoCount: 0,
+  };
+
+  // Pre-select from URL param
+  const params = new URLSearchParams(window.location.search);
+  const tierParam = params.get('tier');
+  if (tierParam) {
+    document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('selected'));
+    const match = document.querySelector(`[data-tier="${tierParam}"]`);
+    if (match) {
+      match.classList.add('selected');
+      state.tier = tierParam;
+      state.price = parseInt(match.dataset.price);
+    }
+  }
+
+  // Tier selection
+  document.querySelectorAll('.tier-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      state.tier = card.dataset.tier;
+      state.price = parseInt(card.dataset.price);
+    });
+
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--x', ((e.clientX - rect.left) / rect.width * 100) + '%');
+      card.style.setProperty('--y', ((e.clientY - rect.top) / rect.height * 100) + '%');
+    });
+  });
+
+  // Occasion selection
+  document.querySelectorAll('.occasion-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.occasion-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      state.occasion = btn.dataset.occasion;
+    });
+  });
+
+  // Photo upload
+  const photoInput = document.getElementById('photoInput');
+  const uploadZone = document.getElementById('uploadZone');
+  const previews = document.getElementById('uploadPreviews');
+
+  photoInput.addEventListener('change', handleFiles);
+
+  uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+  uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+  uploadZone.addEventListener('drop', e => {
+    e.preventDefault();
+    uploadZone.classList.remove('dragover');
+    handleFileList(e.dataTransfer.files);
+  });
+
+  function handleFiles(e) { handleFileList(e.target.files); }
+
+  function handleFileList(files) {
+    state.photoCount = files.length;
+    previews.innerHTML = '';
+    Array.from(files).slice(0, 20).forEach(file => {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.className = 'preview-thumb';
+        previews.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function goNext() {
+    if (currentStep < totalSteps) {
+      updateProgress(currentStep, 'done');
+      currentStep++;
+      updateProgress(currentStep, 'active');
+      showStep(currentStep);
+      if (currentStep === totalSteps) populateReview();
+    }
+  }
+
+  function goBack() {
+    if (currentStep > 1) {
+      updateProgress(currentStep, '');
+      currentStep--;
+      updateProgress(currentStep, 'active');
+      showStep(currentStep);
+    }
+  }
+
+  function showStep(n) {
+    document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('step' + n).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function updateProgress(n, state) {
+    const step = document.querySelector(`[data-step="${n}"]`);
+    if (!step) return;
+    step.classList.remove('active', 'done');
+    if (state) step.classList.add(state);
+
+    if (state === 'done') {
+      step.querySelector('.step-dot').innerHTML = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6l3 3 5-5"/></svg>`;
+    } else if (state === 'active') {
+      step.querySelector('.step-dot').textContent = n;
+    }
+  }
+
+  function populateReview() {
+    const tierNames = { card: 'Story Card', keepsake: 'Keepsake Collection', frame: 'Living Story Frame' };
+    document.getElementById('reviewTier').textContent = tierNames[state.tier] || 'Keepsake Collection';
+    document.getElementById('reviewOccasion').textContent = state.occasion;
+    document.getElementById('reviewPhotos').textContent = state.photoCount + ' photo' + (state.photoCount !== 1 ? 's' : '') + ' uploaded';
+
+    const recipient = document.getElementById('recipientName').value;
+    const sender = document.getElementById('senderName').value;
+    if (recipient) document.getElementById('reviewRecipient').textContent = `For ${recipient}${sender ? ` from ${sender}` : ''}`;
+
+    const msg = document.getElementById('giftMessage').value;
+    document.getElementById('reviewMessage').textContent = msg || '—';
+
+    const addr = [
+      document.getElementById('shipFirst').value,
+      document.getElementById('shipLast').value,
+      document.getElementById('shipAddress').value,
+      document.getElementById('shipCity').value,
+      document.getElementById('shipProvince').value,
+      document.getElementById('shipPostal').value,
+    ].filter(Boolean).join(', ');
+    document.getElementById('reviewDelivery').innerHTML = `<strong>${addr || '—'}</strong>`;
+
+    // Pricing
+    const price = state.price;
+    const shipping = price >= 200 ? 0 : 15;
+    const tax = Math.round(price * 0.13 * 100) / 100;
+    const total = (price + shipping + tax).toFixed(2);
+
+    document.getElementById('summaryTierName').textContent = tierNames[state.tier];
+    document.getElementById('summaryPrice').textContent = '$' + price;
+    document.getElementById('summaryShipping').textContent = shipping === 0 ? 'Free' : '$' + shipping;
+    document.getElementById('summaryTax').textContent = '$' + tax.toFixed(2);
+    document.getElementById('summaryTotal').textContent = '$' + total;
+
+    // Pass to checkout
+    document.getElementById('proceedBtn').href = `checkout.html?tier=${state.tier}&price=${price}&total=${total}`;
+  }
+</script>
+</body>
+</html>

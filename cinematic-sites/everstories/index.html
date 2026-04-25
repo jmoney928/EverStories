@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EverStories — A Lifetime of Memories, Brought to Life</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0B0B0C;
+      --ivory: #F5F1E8;
+      --gold: #C6A96B;
+      --gold-dim: rgba(198, 169, 107, 0.15);
+      --grey: #7A7A7A;
+      --grey-light: rgba(245, 241, 232, 0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--ivory);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 3rem;
+      background: linear-gradient(to bottom, rgba(11,11,12,0.9) 0%, transparent 100%);
+      backdrop-filter: blur(2px);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .nav-logo img { width: 32px; height: 32px; }
+
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--ivory);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(245,241,232,0.65);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--ivory); }
+
+    .btn-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.5rem;
+      background: transparent;
+      border: 1px solid rgba(198, 169, 107, 0.5);
+      color: var(--gold);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.25s, border-color 0.25s, color 0.25s;
+      cursor: pointer;
+    }
+
+    .btn-nav:hover {
+      background: var(--gold-dim);
+      border-color: var(--gold);
+      color: var(--ivory);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 300vh;
+    }
+
+    .hero-sticky {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 100dvh;
+      overflow: hidden;
+    }
+
+    #heroCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      bottom: 14vh;
+      left: 6vw;
+      z-index: 2;
+      max-width: 620px;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+      opacity: 0.85;
+    }
+
+    .hero-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.04;
+      letter-spacing: -0.01em;
+      color: var(--ivory);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: rgba(245,241,232,0.65);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      max-width: 44ch;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.9rem 2.25rem;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.15s;
+    }
+
+    .btn-primary:hover { background: #d4b87a; }
+    .btn-primary:active { transform: scale(0.98); }
+
+    .btn-arrow {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.25s;
+    }
+
+    .btn-primary:hover .btn-arrow { transform: translateX(4px); }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      right: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(245,241,232,0.35);
+    }
+
+    .scroll-line {
+      width: 40px;
+      height: 1px;
+      background: rgba(198,169,107,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: var(--gold);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-section {
+      padding: 2rem 0;
+      border-top: 1px solid rgba(198,169,107,0.15);
+      border-bottom: 1px solid rgba(198,169,107,0.15);
+      overflow: hidden;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      animation: marqueeScroll 28s linear infinite;
+      width: max-content;
+    }
+
+    .marquee-group {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-shrink: 0;
+    }
+
+    .marquee-item {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      font-style: italic;
+      letter-spacing: 0.04em;
+      color: rgba(245,241,232,0.5);
+      white-space: nowrap;
+      padding: 0 2rem;
+    }
+
+    .marquee-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 8rem 0; }
+
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      opacity: 0.85;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 4vw, 3.75rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-top: 5rem;
+    }
+
+    .how-intro {
+      padding-right: 6rem;
+      border-right: 1px solid rgba(198,169,107,0.12);
+    }
+
+    .how-intro p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: rgba(245,241,232,0.6);
+      margin-top: 1.5rem;
+      max-width: 46ch;
+    }
+
+    .how-steps {
+      padding-left: 6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .how-step {
+      padding: 2.5rem 0;
+      border-bottom: 1px solid rgba(245,241,232,0.06);
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .how-step.visible { opacity: 1; transform: none; }
+
+    .how-step:last-child { border-bottom: none; }
+
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      padding-top: 0.1rem;
+    }
+
+    .step-content h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.01em;
+    }
+
+    .step-content p {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: rgba(245,241,232,0.55);
+    }
+
+    /* ── PRODUCTS ── */
+    .products-section { background: #0d0d0e; }
+
+    .products-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+      margin-bottom: 4rem;
+    }
+
+    .products-header p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: rgba(245,241,232,0.55);
+      align-self: end;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 1px;
+      background: rgba(198,169,107,0.1);
+    }
+
+    .product-card {
+      position: relative;
+      background: #0B0B0C;
+      padding: 3rem 2.5rem 3.5rem;
+      cursor: pointer;
+      overflow: hidden;
+      transition: background 0.3s;
+      --x: 50%;
+      --y: 50%;
+    }
+
+    .product-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(280px circle at var(--x) var(--y), rgba(198,169,107,0.12), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      pointer-events: none;
+    }
+
+    .product-card:hover::before { opacity: 1; }
+
+    .product-card.featured {
+      grid-row: span 1;
+      padding: 3.5rem 3rem 4rem;
+    }
+
+    .product-badge {
+      display: inline-block;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(198,169,107,0.35);
+      padding: 0.3rem 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .product-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.01em;
+    }
+
+    .product-card.featured .product-name { font-size: 2.4rem; }
+
+    .product-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--gold);
+      margin-bottom: 1.75rem;
+      line-height: 1;
+    }
+
+    .product-card.featured .product-price { font-size: 3.5rem; }
+
+    .product-desc {
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: rgba(245,241,232,0.5);
+      margin-bottom: 2rem;
+    }
+
+    .product-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .product-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.8rem;
+      color: rgba(245,241,232,0.65);
+      line-height: 1.5;
+    }
+
+    .feature-tick {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    .btn-product {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1.75rem;
+      background: transparent;
+      border: 1px solid rgba(198,169,107,0.4);
+      color: var(--gold);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.25s, border-color 0.25s, color 0.25s, transform 0.15s;
+    }
+
+    .btn-product:hover {
+      background: var(--gold-dim);
+      border-color: var(--gold);
+      color: var(--ivory);
+    }
+
+    .btn-product:active { transform: scale(0.98); }
+
+    .product-card.featured .btn-product {
+      background: var(--gold);
+      color: var(--black);
+      border-color: var(--gold);
+      font-weight: 500;
+    }
+
+    .product-card.featured .btn-product:hover { background: #d4b87a; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-section {
+      border-top: 1px solid rgba(198,169,107,0.12);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 6rem;
+      margin-top: 5rem;
+    }
+
+    .testimonial-large {
+      border-left: 2px solid var(--gold);
+      padding-left: 2.5rem;
+    }
+
+    .testimonial-large blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--ivory);
+      margin-bottom: 2rem;
+    }
+
+    .testimonial-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .testimonial-name {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--ivory);
+    }
+
+    .testimonial-detail {
+      font-size: 0.75rem;
+      color: var(--grey);
+    }
+
+    .testimonials-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      padding-top: 0.5rem;
+    }
+
+    .testimonial-small {
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(245,241,232,0.06);
+    }
+
+    .testimonial-small:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .testimonial-small blockquote {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: rgba(245,241,232,0.65);
+      margin-bottom: 1rem;
+    }
+
+    .star-row {
+      display: flex;
+      gap: 0.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .star {
+      width: 12px;
+      height: 12px;
+      fill: var(--gold);
+    }
+
+    /* ── TRUST BAND ── */
+    .trust-band {
+      padding: 3.5rem 0;
+      border-top: 1px solid rgba(198,169,107,0.1);
+      border-bottom: 1px solid rgba(198,169,107,0.1);
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .trust-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .trust-icon {
+      width: 28px;
+      height: 28px;
+      stroke: var(--gold);
+      fill: none;
+      stroke-width: 1.5;
+      margin-bottom: 0.25rem;
+    }
+
+    .trust-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--ivory);
+      letter-spacing: 0.04em;
+    }
+
+    .trust-sub {
+      font-size: 0.7rem;
+      color: var(--grey);
+    }
+
+    /* ── FINAL CTA ── */
+    .cta-section {
+      background: linear-gradient(135deg, #0f0d09 0%, #0B0B0C 60%, #110e08 100%);
+      text-align: center;
+      padding: 10rem 0;
+    }
+
+    .cta-section .section-label { text-align: center; }
+
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.75rem, 5vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      max-width: 800px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .cta-title em { font-style: italic; color: var(--gold); }
+
+    .cta-sub {
+      font-size: 1rem;
+      color: rgba(245,241,232,0.5);
+      margin-bottom: 3rem;
+      max-width: 50ch;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 4rem 0 3rem;
+      border-top: 1px solid rgba(245,241,232,0.06);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.82rem;
+      line-height: 1.8;
+      color: rgba(245,241,232,0.4);
+      margin-top: 1rem;
+      max-width: 38ch;
+    }
+
+    .footer-col h4 {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245,241,232,0.4);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .footer-col a {
+      font-size: 0.82rem;
+      color: rgba(245,241,232,0.55);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover { color: var(--ivory); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(245,241,232,0.05);
+    }
+
+    .footer-bottom p {
+      font-size: 0.72rem;
+      color: rgba(245,241,232,0.25);
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero-overlay { left: 1.5rem; bottom: 10vh; }
+      section { padding: 5rem 0; }
+      .container { padding: 0 1.5rem; }
+      .how-grid { grid-template-columns: 1fr; gap: 4rem; }
+      .how-intro { padding-right: 0; border-right: none; border-bottom: 1px solid rgba(198,169,107,0.12); padding-bottom: 3rem; }
+      .how-steps { padding-left: 0; }
+      .products-header { grid-template-columns: 1fr; gap: 1.5rem; }
+      .products-grid { grid-template-columns: 1fr; }
+      .product-card.featured { padding: 2.5rem 2rem 3rem; }
+      .testimonials-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .trust-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="assets/logo-tree.svg" alt="EverStories tree of life logo">
+    <span class="nav-brand">EverStories</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#products">Gifts</a></li>
+    <li><a href="#stories">Stories</a></li>
+    <li><a href="create.html" class="btn-nav">Begin Your Story</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-sticky">
+    <canvas id="heroCanvas"></canvas>
+
+    <div class="hero-overlay" id="heroText">
+      <span class="hero-eyebrow">Canadian-Made Memory Gifts</span>
+      <h1 class="hero-headline">
+        A Lifetime<br>of Memories,<br><em>Brought to Life.</em>
+      </h1>
+      <p class="hero-sub">Transform your most precious photographs into a cinematic memory gift — delivered in a luxury keepsake box.</p>
+      <a href="create.html" class="btn-primary">
+        Begin Your Story
+        <svg class="btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M3 8h10M9 4l4 4-4 4"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ── -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <div class="marquee-group">
+      <span class="marquee-item">A Lifetime of Memories</span>
+      <span class="marquee-dot"></span>
+      <span class="marquee-item">Brought to Life</span>
+      <span class="marquee-dot"></span>
+      <span class="marquee-item">Canadian Crafted</span>
+      <span class="marquee-dot"></span>
+      <span class="marquee-item">EverStories</span>
+      <span class="marquee-dot"></span>
+      <span class="marquee-item">The Gift of Memory</span>
+      <span class="marquee-dot"></span>
+      <span class="marquee-item">Every Story Deserves to Live</span>
+      <span class="marquee-dot"></span>
+    </div>
+    <div class="marquee-group" aria-hidden="true">
+      <span class="marquee-item">A Lifetime of Memories</span>
+      <span class="marquee-dot"></span>
+      <span class="marquee-item">Brought to Life</span>
+      <span class="marquee-dot"></span>
+      <span class="marquee-item">Canadian Crafted</span>
+      <span class="marquee-dot"></span>
+      <span class="marquee-item">EverStories</span>
+      <span class="marquee-dot"></span>
+      <span class="marquee-item">The Gift of Memory</span>
+      <span class="marquee-dot"></span>
+      <span class="marquee-item">Every Story Deserves to Live</span>
+      <span class="marquee-dot"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ── HOW IT WORKS ── -->
+<section id="how">
+  <div class="container">
+    <div class="how-grid">
+      <div class="how-intro reveal">
+        <p class="section-label">The Process</p>
+        <h2 class="section-title">Three steps to an unforgettable gift</h2>
+        <p>We take your photographs and transform them into a cinematic living memory — then deliver everything in a premium, gift-ready keepsake box. The whole process takes less than a week.</p>
+      </div>
+      <div class="how-steps">
+        <div class="how-step">
+          <span class="step-num">01</span>
+          <div class="step-content">
+            <h3>Share Your Photos</h3>
+            <p>Upload your photos and tell us the story. A wedding, a birthday, a life well lived — any moment worth preserving.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <span class="step-num">02</span>
+          <div class="step-content">
+            <h3>We Craft Your Memory Film</h3>
+            <p>Our team uses AI-powered cinematic tools to animate your photographs into a living, breathing memory film — colour, motion, life.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <span class="step-num">03</span>
+          <div class="step-content">
+            <h3>Delivered to Your Door</h3>
+            <p>Your gift arrives in a matte black EverStories keepsake box, ready to present. Gift wrapping and personal messages included.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRODUCTS ── -->
+<section id="products" class="products-section">
+  <div class="container">
+    <div class="products-header">
+      <div class="reveal">
+        <p class="section-label">Choose Your Gift</p>
+        <h2 class="section-title">Every story,<br>a different format</h2>
+      </div>
+      <p class="reveal">Each tier includes a custom memory film crafted from your photos. Choose the format that fits the moment and the person receiving it.</p>
+    </div>
+
+    <div class="products-grid">
+
+      <!-- Featured: Keepsake Collection -->
+      <div class="product-card featured" data-card>
+        <span class="product-badge">Most Popular</span>
+        <h3 class="product-name">Keepsake Collection</h3>
+        <div class="product-price">$250</div>
+        <p class="product-desc">The complete memory gift experience. A memory film delivered on a luxury digital frame, presented inside our signature matte black velvet-lined keepsake box.</p>
+        <ul class="product-features">
+          <li>
+            <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
+              <path d="M2 7l3.5 3.5L12 3"/>
+            </svg>
+            Custom cinematic memory film (up to 60 seconds)
+          </li>
+          <li>
+            <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
+              <path d="M2 7l3.5 3.5L12 3"/>
+            </svg>
+            Pre-loaded matte black digital picture frame
+          </li>
+          <li>
+            <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
+              <path d="M2 7l3.5 3.5L12 3"/>
+            </svg>
+            Luxury EverStories keepsake box, black velvet interior
+          </li>
+          <li>
+            <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
+              <path d="M2 7l3.5 3.5L12 3"/>
+            </svg>
+            Handwritten gift card, gift-ready packaging
+          </li>
+          <li>
+            <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
+              <path d="M2 7l3.5 3.5L12 3"/>
+            </svg>
+            Free shipping across Canada
+          </li>
+        </ul>
+        <a href="create.html?tier=keepsake" class="btn-product">
+          Choose This Gift
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M2 7h10M8 3l4 4-4 4"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Story Card -->
+      <div class="product-card" data-card>
+        <span class="product-badge">Entry</span>
+        <h3 class="product-name">Story Card</h3>
+        <div class="product-price">$150</div>
+        <p class="product-desc">A premium printed memory card with an embedded QR code. Scan to watch the living memory film on any device — a gift that never stops giving.</p>
+        <ul class="product-features">
+          <li>
+            <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
+              <path d="M2 7l3.5 3.5L12 3"/>
+            </svg>
+            Custom memory film (up to 45 seconds)
+          </li>
+          <li>
+            <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
+              <path d="M2 7l3.5 3.5L12 3"/>
+            </svg>
+            Luxury matte black printed card with QR
+          </li>
+          <li>
+            <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
+              <path d="M2 7l3.5 3.5L12 3"/>
+            </svg>
+            Hosted memory link, permanent access
+          </li>
+          <li>
+            <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
+              <path d="M2 7l3.5 3.5L12 3"/>
+            </svg>
+            Gold foil EverStories envelope
+          </li>
+        </ul>
+        <a href="create.html?tier=card" class="btn-product">Choose This Gift</a>
+      </div>
+
+      <!-- Living Story Frame -->
+      <div class="product-card" data-card>
+        <span class="product-badge">Premium</span>
+        <h3 class="product-name">Living Story Frame</h3>
+        <div class="product-price">$350</div>
+        <p class="product-desc">Our most complete offering. Everything in the Keepsake Collection plus a larger gallery-sized frame and extended memory film — a permanent piece for the home.</p>
+        <ul class="product-features">
+          <li>
+            <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
+              <path d="M2 7l3.5 3.5L12 3"/>
+            </svg>
+            Extended cinematic film (up to 3 minutes)
+          </li>
+          <li>
+            <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
+              <path d="M2 7l3.5 3.5L12 3"/>
+            </svg>
+            Large gallery-format digital frame
+          </li>
+          <li>
+            <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
+              <path d="M2 7l3.5 3.5L12 3"/>
+            </svg>
+            Premium keepsake box + white glove delivery
+          </li>
+          <li>
+            <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
+              <path d="M2 7l3.5 3.5L12 3"/>
+            </svg>
+            Engraved nameplate on frame
+          </li>
+        </ul>
+        <a href="create.html?tier=frame" class="btn-product">Choose This Gift</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section id="stories" class="testimonials-section">
+  <div class="container">
+    <p class="section-label reveal">Real Stories</p>
+    <div class="testimonials-grid">
+      <div class="testimonial-large reveal">
+        <blockquote>
+          "I gave this to my mother on her 70th birthday. When she saw her wedding photos come to life on the frame — my father had been gone for six years — she wept. I have never seen her so moved. EverStories gave her something I never could have."
+        </blockquote>
+        <div class="testimonial-meta">
+          <span class="testimonial-name">Margaret O.</span>
+          <span class="testimonial-detail">Keepsake Collection — Ottawa, Ontario</span>
+        </div>
+      </div>
+
+      <div class="testimonials-stack">
+        <div class="testimonial-small reveal">
+          <div class="star-row">
+            <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5l3.5-.5z"/></svg>
+            <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5l3.5-.5z"/></svg>
+            <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5l3.5-.5z"/></svg>
+            <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5l3.5-.5z"/></svg>
+            <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5l3.5-.5z"/></svg>
+          </div>
+          <blockquote>"I ordered the Story Card for my parents' 40th anniversary. They scanned it at the dinner table and the whole family cried together. Worth every penny."</blockquote>
+          <div class="testimonial-meta">
+            <span class="testimonial-name">Daniel R.</span>
+            <span class="testimonial-detail">Story Card — Vancouver, BC</span>
+          </div>
+        </div>
+
+        <div class="testimonial-small reveal">
+          <div class="star-row">
+            <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5l3.5-.5z"/></svg>
+            <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5l3.5-.5z"/></svg>
+            <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5l3.5-.5z"/></svg>
+            <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5l3.5-.5z"/></svg>
+            <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5l3.5-.5z"/></svg>
+          </div>
+          <blockquote>"The presentation alone stopped me in my tracks. The black box, the gold seal — before you even open it, you know this is something different."</blockquote>
+          <div class="testimonial-meta">
+            <span class="testimonial-name">Simone T.</span>
+            <span class="testimonial-detail">Living Story Frame — Montreal, QC</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TRUST BAND ── -->
+<div class="trust-band">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="trust-item">
+        <svg class="trust-icon" viewBox="0 0 28 28">
+          <path d="M14 3l9 4v7c0 5-4 9-9 11-5-2-9-6-9-11V7l9-4z"/>
+        </svg>
+        <span class="trust-label">Privacy Protected</span>
+        <span class="trust-sub">Your photos are never stored or shared</span>
+      </div>
+      <div class="trust-item">
+        <svg class="trust-icon" viewBox="0 0 28 28">
+          <rect x="3" y="8" width="22" height="17" rx="2"/>
+          <path d="M9 8V6a5 5 0 0110 0v2"/>
+        </svg>
+        <span class="trust-label">Secure Checkout</span>
+        <span class="trust-sub">SSL encrypted, Apple & Google Pay</span>
+      </div>
+      <div class="trust-item">
+        <svg class="trust-icon" viewBox="0 0 28 28">
+          <circle cx="14" cy="14" r="11"/>
+          <path d="M14 8v6l4 2"/>
+        </svg>
+        <span class="trust-label">5–7 Day Delivery</span>
+        <span class="trust-sub">Free shipping on orders over $200</span>
+      </div>
+      <div class="trust-item">
+        <svg class="trust-icon" viewBox="0 0 28 28">
+          <path d="M7 14l5 5L21 9"/>
+          <circle cx="14" cy="14" r="11"/>
+        </svg>
+        <span class="trust-label">Satisfaction Guaranteed</span>
+        <span class="trust-sub">Not in love with it? We'll make it right</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FINAL CTA ── -->
+<section class="cta-section">
+  <div class="container">
+    <p class="section-label reveal">Start Today</p>
+    <h2 class="cta-title reveal">
+      Some stories deserve<br>to <em>live forever.</em>
+    </h2>
+    <p class="cta-sub reveal">Upload your photos, choose your format, and we'll handle the rest. Your memory gift, delivered within the week.</p>
+    <a href="create.html" class="btn-primary reveal">
+      Begin Your Story
+      <svg class="btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M3 8h10M9 4l4 4-4 4"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:0.5rem">
+          <img src="assets/logo-tree.svg" alt="EverStories" width="28" height="28">
+          <span class="nav-brand" style="font-size:1.1rem">EverStories</span>
+        </div>
+        <p>Canada's most personal memory gift. Turning photographs into cinematic living memories, delivered in a luxury keepsake box.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Gifts</h4>
+        <ul>
+          <li><a href="create.html?tier=card">Story Card — $150</a></li>
+          <li><a href="create.html?tier=keepsake">Keepsake Collection — $250</a></li>
+          <li><a href="create.html?tier=frame">Living Story Frame — $350</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">How It Works</a></li>
+          <li><a href="#">Shipping & Delivery</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="mailto:hello@everstories.ca">hello@everstories.ca</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 EverStories Inc. All rights reserved. Made in Canada.</p>
+      <p>Crafted with care for the stories that matter most.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ── SCRIPTS ── -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ── CANVAS FRAME ANIMATION ──
+  const totalFrames = 193;
+  const canvas = document.getElementById('heroCanvas');
+  const ctx = canvas.getContext('2d');
+  const frames = new Array(totalFrames);
+  let loadedCount = 0;
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    drawFrame(currentFrame);
+  }
+
+  let currentFrame = 0;
+
+  function drawFrame(index) {
+    const img = frames[index];
+    if (!img || !img.complete || !img.naturalWidth) return;
+    const scale = Math.max(canvas.width / img.naturalWidth, canvas.height / img.naturalHeight);
+    const w = img.naturalWidth * scale;
+    const h = img.naturalHeight * scale;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
+  }
+
+  function loadFrames() {
+    for (let i = 0; i < totalFrames; i++) {
+      const img = new Image();
+      const num = String(i + 1).padStart(4, '0');
+      img.src = `assets/frames/frame-${num}.jpg`;
+      img.onload = () => {
+        loadedCount++;
+        if (i === 0) { drawFrame(0); }
+      };
+      frames[i] = img;
+    }
+  }
+
+  const obj = { frame: 0 };
+  gsap.to(obj, {
+    frame: totalFrames - 1,
+    snap: 'frame',
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.hero',
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: 0.5,
+    },
+    onUpdate() {
+      currentFrame = Math.round(obj.frame);
+      drawFrame(currentFrame);
+    }
+  });
+
+  // Fade hero text out as user scrolls into the animation
+  gsap.to('#heroText', {
+    opacity: 0,
+    y: -30,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.hero',
+      start: 'top top',
+      end: '30% top',
+      scrub: true,
+    }
+  });
+
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+  loadFrames();
+
+  // ── SPOTLIGHT BORDER CARDS ──
+  document.querySelectorAll('[data-card]').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty('--x', x + '%');
+      card.style.setProperty('--y', y + '%');
+    });
+  });
+
+  // ── SCROLL REVEAL ──
+  const revealEls = document.querySelectorAll('.reveal, .how-step');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

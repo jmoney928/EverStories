@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EverStories — Brand Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #1a1a1c; font-family: 'Inter', sans-serif; color: #F5F1E8; padding: 40px; min-height: 100vh; }
+
+  .card { max-width: 960px; margin: 0 auto; }
+
+  .header { text-align: center; margin-bottom: 60px; }
+  .header .brand { font-family: 'Cormorant Garamond', serif; font-size: 64px; font-weight: 300; letter-spacing: 0.15em; color: #C6A96B; }
+  .header .tagline { font-size: 14px; letter-spacing: 0.3em; text-transform: uppercase; color: #7A7A7A; margin-top: 8px; }
+
+  .section { margin-bottom: 48px; }
+  .section-label { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: #7A7A7A; margin-bottom: 20px; border-bottom: 1px solid #2a2a2c; padding-bottom: 10px; }
+
+  /* COLORS */
+  .swatches { display: flex; gap: 16px; flex-wrap: wrap; }
+  .swatch { width: 100px; }
+  .swatch-block { height: 80px; border-radius: 8px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.06); }
+  .swatch-name { font-size: 11px; color: #7A7A7A; margin-bottom: 2px; }
+  .swatch-hex { font-size: 13px; font-weight: 500; font-family: 'Courier New', monospace; color: #F5F1E8; }
+
+  /* TYPOGRAPHY */
+  .type-samples { display: flex; flex-direction: column; gap: 24px; }
+  .type-sample { background: #0B0B0C; border-radius: 12px; padding: 28px 32px; border: 1px solid #2a2a2c; }
+  .type-label { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: #7A7A7A; margin-bottom: 12px; }
+  .type-heading { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: #F5F1E8; line-height: 1.1; }
+  .type-subheading { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; font-style: italic; color: #C6A96B; margin-top: 8px; }
+  .type-body { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 300; color: #F5F1E8; line-height: 1.7; margin-top: 12px; max-width: 480px; }
+  .type-cta { display: inline-block; margin-top: 16px; background: #C6A96B; color: #0B0B0C; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 12px 28px; border-radius: 4px; }
+  .type-muted { font-size: 13px; color: #7A7A7A; margin-top: 8px; }
+
+  /* COPY */
+  .copy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .copy-item { background: #0B0B0C; border-radius: 10px; padding: 20px 24px; border: 1px solid #2a2a2c; }
+  .copy-item-label { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: #C6A96B; margin-bottom: 8px; }
+  .copy-item-text { font-size: 14px; color: #F5F1E8; line-height: 1.6; }
+
+  /* PRICING */
+  .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .tier { background: #0B0B0C; border-radius: 12px; padding: 24px; border: 1px solid #2a2a2c; }
+  .tier.featured { border-color: #C6A96B; }
+  .tier-badge { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #C6A96B; margin-bottom: 8px; }
+  .tier-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: #F5F1E8; margin-bottom: 4px; }
+  .tier-price { font-size: 28px; font-weight: 600; color: #C6A96B; margin-bottom: 16px; }
+  .tier-feature { font-size: 12px; color: #7A7A7A; line-height: 1.8; }
+
+  /* EMOTION */
+  .emotion-words { display: flex; flex-wrap: wrap; gap: 10px; }
+  .emotion-word { padding: 8px 16px; border-radius: 100px; border: 1px solid #2a2a2c; font-size: 13px; color: #F5F1E8; }
+  .emotion-word.gold { border-color: #C6A96B; color: #C6A96B; }
+</style>
+</head>
+<body>
+<div class="card">
+
+  <div class="header">
+    <div class="brand">EverStories</div>
+    <div class="tagline">Memory gifting · Premium keepsakes · Canada</div>
+  </div>
+
+  <!-- COLORS -->
+  <div class="section">
+    <div class="section-label">Color Palette</div>
+    <div class="swatches">
+      <div class="swatch">
+        <div class="swatch-block" style="background:#0B0B0C;"></div>
+        <div class="swatch-name">Midnight Black</div>
+        <div class="swatch-hex">#0B0B0C</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-block" style="background:#F5F1E8; border-color: rgba(0,0,0,0.1);"></div>
+        <div class="swatch-name">Warm Ivory</div>
+        <div class="swatch-hex">#F5F1E8</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-block" style="background:#C6A96B;"></div>
+        <div class="swatch-name">Soft Gold</div>
+        <div class="swatch-hex">#C6A96B</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-block" style="background:#7A7A7A;"></div>
+        <div class="swatch-name">Muted Grey</div>
+        <div class="swatch-hex">#7A7A7A</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-block" style="background:#1C1C1E;"></div>
+        <div class="swatch-name">Card Surface</div>
+        <div class="swatch-hex">#1C1C1E</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div class="section">
+    <div class="section-label">Typography System</div>
+    <div class="type-samples">
+      <div class="type-sample">
+        <div class="type-label">Cormorant Garamond — Headlines</div>
+        <div class="type-heading">A Lifetime of Memories,<br>Brought to Life</div>
+        <div class="type-subheading">Turn moments into meaning.</div>
+        <div class="type-body">Turn your loved one's life into a beautiful video story — delivered as a meaningful gift they'll never forget.</div>
+        <div class="type-cta">Start Your Story</div>
+        <div class="type-muted">Inter Light / 300 — body & UI copy</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY COPY -->
+  <div class="section">
+    <div class="section-label">Brand Copy</div>
+    <div class="copy-grid">
+      <div class="copy-item">
+        <div class="copy-item-label">Hero Headline</div>
+        <div class="copy-item-text">"A Lifetime of Memories, Brought to Life"</div>
+      </div>
+      <div class="copy-item">
+        <div class="copy-item-label">Hero Subheadline</div>
+        <div class="copy-item-text">"Turn your loved one's life into a beautiful video story — delivered as a meaningful gift they'll never forget."</div>
+      </div>
+      <div class="copy-item">
+        <div class="copy-item-label">Primary CTA</div>
+        <div class="copy-item-text">Start Your Story</div>
+      </div>
+      <div class="copy-item">
+        <div class="copy-item-label">Emotional Proof</div>
+        <div class="copy-item-text">"My dad cried watching it… this meant everything to our family."</div>
+      </div>
+      <div class="copy-item">
+        <div class="copy-item-label">Trust Signals</div>
+        <div class="copy-item-text">Made in Canada · Secure checkout · Satisfaction guarantee · 5–7 day delivery</div>
+      </div>
+      <div class="copy-item">
+        <div class="copy-item-label">Category</div>
+        <div class="copy-item-text">Premium memory gifting · Video life stories · Keepsake products</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIERS -->
+  <div class="section">
+    <div class="section-label">Product Tiers</div>
+    <div class="tiers">
+      <div class="tier">
+        <div class="tier-badge">Entry</div>
+        <div class="tier-name">The Story Card</div>
+        <div class="tier-price">$150</div>
+        <div class="tier-feature">Printed premium card<br>QR code to video<br>Digital story link</div>
+      </div>
+      <div class="tier">
+        <div class="tier-badge">Mid</div>
+        <div class="tier-name">The Keepsake Collection</div>
+        <div class="tier-price">$250</div>
+        <div class="tier-feature">Story card + QR code<br>Keepsake box<br>Mounted photo<br>Mini photo booklet</div>
+      </div>
+      <div class="tier featured">
+        <div class="tier-badge">★ Most Popular</div>
+        <div class="tier-name">The Living Story Frame</div>
+        <div class="tier-price">$350</div>
+        <div class="tier-feature">Preloaded digital frame<br>Auto-playing video + slideshow<br>The experience they'll relive every day</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMOTIONAL DIRECTION -->
+  <div class="section">
+    <div class="section-label">Emotional Direction</div>
+    <div class="emotion-words">
+      <span class="emotion-word gold">Intimate</span>
+      <span class="emotion-word gold">Timeless</span>
+      <span class="emotion-word gold">Meaningful</span>
+      <span class="emotion-word">Legacy</span>
+      <span class="emotion-word">Family</span>
+      <span class="emotion-word">Celebration</span>
+      <span class="emotion-word">Memory</span>
+      <span class="emotion-word">Heirloom</span>
+      <span class="emotion-word">Love</span>
+      <span class="emotion-word">Tears of joy</span>
+      <span class="emotion-word">Effortless</span>
+      <span class="emotion-word">Premium</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

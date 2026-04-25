@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" fill="none">
+  <!-- Trunk -->
+  <path d="M100 210 L100 140" stroke="#C6A96B" stroke-width="6" stroke-linecap="round"/>
+  <!-- Root spread -->
+  <path d="M100 210 Q80 205 65 215" stroke="#C6A96B" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <path d="M100 210 Q120 205 135 215" stroke="#C6A96B" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <path d="M100 200 Q75 198 58 206" stroke="#C6A96B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M100 200 Q125 198 142 206" stroke="#C6A96B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+  <!-- Main lower branches -->
+  <path d="M100 155 Q75 148 55 158" stroke="#C6A96B" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M100 155 Q125 148 145 158" stroke="#C6A96B" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+  <!-- Mid branches -->
+  <path d="M100 138 Q72 128 48 140" stroke="#C6A96B" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <path d="M100 138 Q128 128 152 140" stroke="#C6A96B" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <path d="M100 130 Q85 118 72 124" stroke="#C6A96B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M100 130 Q115 118 128 124" stroke="#C6A96B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+  <!-- Upper branches -->
+  <path d="M100 118 Q68 105 42 118" stroke="#C6A96B" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M100 118 Q132 105 158 118" stroke="#C6A96B" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M100 108 Q78 95 62 102" stroke="#C6A96B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M100 108 Q122 95 138 102" stroke="#C6A96B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+  <!-- Top branches -->
+  <path d="M100 95 Q70 80 48 90" stroke="#C6A96B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M100 95 Q130 80 152 90" stroke="#C6A96B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M100 85 Q82 70 68 78" stroke="#C6A96B" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M100 85 Q118 70 132 78" stroke="#C6A96B" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M100 78 Q88 62 78 68" stroke="#C6A96B" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M100 78 Q112 62 122 68" stroke="#C6A96B" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+  <!-- Canopy tips - leaf clusters -->
+  <circle cx="42" cy="116" r="7" fill="#C6A96B" opacity="0.85"/>
+  <circle cx="158" cy="116" r="7" fill="#C6A96B" opacity="0.85"/>
+  <circle cx="48" cy="88" r="6" fill="#C6A96B" opacity="0.85"/>
+  <circle cx="152" cy="88" r="6" fill="#C6A96B" opacity="0.85"/>
+  <circle cx="55" cy="157" r="6" fill="#C6A96B" opacity="0.75"/>
+  <circle cx="145" cy="157" r="6" fill="#C6A96B" opacity="0.75"/>
+  <circle cx="48" cy="138" r="5.5" fill="#C6A96B" opacity="0.8"/>
+  <circle cx="152" cy="138" r="5.5" fill="#C6A96B" opacity="0.8"/>
+  <circle cx="62" cy="100" r="6" fill="#C6A96B" opacity="0.85"/>
+  <circle cx="138" cy="100" r="6" fill="#C6A96B" opacity="0.85"/>
+  <circle cx="68" cy="76" r="5.5" fill="#C6A96B" opacity="0.85"/>
+  <circle cx="132" cy="76" r="5.5" fill="#C6A96B" opacity="0.85"/>
+  <circle cx="78" cy="65" r="5" fill="#C6A96B" opacity="0.9"/>
+  <circle cx="122" cy="65" r="5" fill="#C6A96B" opacity="0.9"/>
+  <circle cx="72" cy="122" r="5" fill="#C6A96B" opacity="0.8"/>
+  <circle cx="128" cy="122" r="5" fill="#C6A96B" opacity="0.8"/>
+  <circle cx="100" cy="52" r="8" fill="#C6A96B" opacity="0.95"/>
+  <circle cx="86" cy="58" r="5.5" fill="#C6A96B" opacity="0.9"/>
+  <circle cx="114" cy="58" r="5.5" fill="#C6A96B" opacity="0.9"/>
+  <circle cx="100" cy="30" r="6" fill="#C6A96B" opacity="0.9"/>
+  <circle cx="88" cy="36" r="4.5" fill="#C6A96B" opacity="0.85"/>
+  <circle cx="112" cy="36" r="4.5" fill="#C6A96B" opacity="0.85"/>
+  <circle cx="78" cy="46" r="4" fill="#C6A96B" opacity="0.8"/>
+  <circle cx="122" cy="46" r="4" fill="#C6A96B" opacity="0.8"/>
+</svg>

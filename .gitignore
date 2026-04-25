@@ -1,0 +1,24 @@
+.DS_Store
+*.DS_Store
+
+# Large source videos — not needed for the site
+cinematic-sites/everstories/assets/*.mp4
+
+# Raw source images — not needed for the site
+cinematic-sites/everstories/assets/hero-source*.jpg
+cinematic-sites/everstories/assets/hero-v*.jpg
+cinematic-sites/everstories/assets/hero-concept*.jpg
+cinematic-sites/everstories/assets/hero.jpg
+cinematic-sites/everstories/assets/hero-source.jpg
+cinematic-sites/everstories/assets/hero-source-overhead.jpg
+cinematic-sites/everstories/assets/wedding-1080p.jpg
+cinematic-sites/everstories/assets/wedding2-1080p.jpg
+cinematic-sites/everstories/assets/Wedding2.png
+cinematic-sites/everstories/assets/concat*.txt
+
+# Root source files
+wedding.jpg
+"ChatGPT Image Apr 24, 2026, 12_17_08 PM.png"
+
+# Toolkit zip
+cinematic-sites-agent-kit-master/

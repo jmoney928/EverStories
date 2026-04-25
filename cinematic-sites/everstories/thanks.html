@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmed — EverStories</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0B0B0C;
+      --ivory: #F5F1E8;
+      --gold: #C6A96B;
+      --gold-dim: rgba(198,169,107,0.1);
+      --grey: #7A7A7A;
+      --border: rgba(245,241,232,0.08);
+    }
+
+    body {
+      background: var(--black);
+      color: var(--ivory);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .nav-logo img { width: 28px; height: 28px; }
+
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--ivory);
+    }
+
+    /* Confirmation pulse ring */
+    .confirm-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 5rem 1.5rem;
+      text-align: center;
+    }
+
+    .confirm-icon {
+      position: relative;
+      width: 88px;
+      height: 88px;
+      margin-bottom: 2.5rem;
+    }
+
+    .confirm-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1px solid rgba(198,169,107,0.3);
+      animation: ringPulse 2.5s ease-out infinite;
+    }
+
+    .confirm-ring:nth-child(2) { animation-delay: 0.6s; }
+    .confirm-ring:nth-child(3) { animation-delay: 1.2s; }
+
+    @keyframes ringPulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    .confirm-circle {
+      position: absolute;
+      inset: 12px;
+      border-radius: 50%;
+      background: var(--gold-dim);
+      border: 1px solid rgba(198,169,107,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .confirm-circle svg { stroke: var(--gold); fill: none; stroke-width: 1.5; }
+
+    .confirm-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+
+    .confirm-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 1rem;
+      max-width: 680px;
+    }
+
+    .confirm-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .confirm-sub {
+      font-size: 0.95rem;
+      color: rgba(245,241,232,0.5);
+      line-height: 1.75;
+      max-width: 50ch;
+      margin: 0 auto 3rem;
+    }
+
+    .order-ref {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1.75rem;
+      border: 1px solid rgba(198,169,107,0.2);
+      background: var(--gold-dim);
+      margin-bottom: 4rem;
+    }
+
+    .order-ref-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--grey);
+    }
+
+    .order-ref-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+    }
+
+    /* Timeline */
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      max-width: 900px;
+      width: 100%;
+      position: relative;
+      margin-bottom: 4rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: rgba(198,169,107,0.15);
+    }
+
+    .timeline-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 0 1rem;
+      position: relative;
+    }
+
+    .timeline-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(198,169,107,0.2);
+      background: var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      transition: all 0.4s;
+    }
+
+    .timeline-dot.done {
+      border-color: var(--gold);
+      background: var(--gold-dim);
+    }
+
+    .timeline-dot svg { stroke: var(--grey); fill: none; stroke-width: 1.5; }
+    .timeline-dot.done svg { stroke: var(--gold); }
+
+    .timeline-label {
+      font-size: 0.72rem;
+      color: rgba(245,241,232,0.4);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .timeline-step:first-child .timeline-label { color: var(--ivory); }
+    .timeline-step:first-child .timeline-label strong { color: var(--gold); display: block; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* Next steps */
+    .next-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(198,169,107,0.08);
+      max-width: 900px;
+      width: 100%;
+      margin-bottom: 3.5rem;
+    }
+
+    .next-card {
+      background: #0d0d0e;
+      padding: 2rem 1.75rem;
+      text-align: left;
+    }
+
+    .next-icon {
+      width: 36px;
+      height: 36px;
+      stroke: var(--gold);
+      fill: none;
+      stroke-width: 1.25;
+      margin-bottom: 1rem;
+    }
+
+    .next-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .next-desc {
+      font-size: 0.8rem;
+      color: rgba(245,241,232,0.45);
+      line-height: 1.7;
+    }
+
+    /* CTA */
+    .btn-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.9rem 2.25rem;
+      background: transparent;
+      border: 1px solid rgba(198,169,107,0.35);
+      color: var(--gold);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.25s, border-color 0.25s, color 0.25s;
+    }
+
+    .btn-home:hover {
+      background: var(--gold-dim);
+      border-color: var(--gold);
+      color: var(--ivory);
+    }
+
+    footer {
+      padding: 2rem 3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p {
+      font-size: 0.72rem;
+      color: rgba(245,241,232,0.2);
+    }
+
+    /* Animate in */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: none; }
+    }
+
+    .fade-up:nth-child(1) { animation-delay: 0.1s; }
+    .fade-up:nth-child(2) { animation-delay: 0.25s; }
+    .fade-up:nth-child(3) { animation-delay: 0.4s; }
+    .fade-up:nth-child(4) { animation-delay: 0.55s; }
+    .fade-up:nth-child(5) { animation-delay: 0.7s; }
+    .fade-up:nth-child(6) { animation-delay: 0.85s; }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .timeline { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .timeline::before { display: none; }
+      .next-steps { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="assets/logo-tree.svg" alt="EverStories">
+    <span class="nav-brand">EverStories</span>
+  </a>
+  <span style="font-size:0.72rem; color:var(--grey); letter-spacing:0.1em; text-transform:uppercase;">Order Confirmed</span>
+</nav>
+
+<div class="confirm-wrap">
+
+  <div class="confirm-icon fade-up">
+    <div class="confirm-ring"></div>
+    <div class="confirm-ring"></div>
+    <div class="confirm-ring"></div>
+    <div class="confirm-circle">
+      <svg width="22" height="22" viewBox="0 0 22 22">
+        <path d="M4 11l5 5 9-9"/>
+      </svg>
+    </div>
+  </div>
+
+  <p class="confirm-eyebrow fade-up">Your story is in good hands</p>
+
+  <h1 class="confirm-title fade-up">
+    Order confirmed.<br><em>The crafting begins.</em>
+  </h1>
+
+  <p class="confirm-sub fade-up">
+    Thank you. Our team will begin working on your memory film within 24 hours. You'll receive a confirmation email shortly, and a preview before we ship.
+  </p>
+
+  <div class="order-ref fade-up">
+    <span class="order-ref-label">Order</span>
+    <span class="order-ref-num" id="orderNum">ES-2025-XXXX</span>
+    <span class="order-ref-label" id="orderAmount"></span>
+  </div>
+
+  <!-- Timeline -->
+  <div class="timeline fade-up">
+    <div class="timeline-step">
+      <div class="timeline-dot done">
+        <svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8l3.5 3.5L13 4"/></svg>
+      </div>
+      <div class="timeline-label">
+        <strong>Today</strong>
+        Order received
+      </div>
+    </div>
+    <div class="timeline-step">
+      <div class="timeline-dot">
+        <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5"/><path d="M8 5v3l2 2"/></svg>
+      </div>
+      <div class="timeline-label">24 hrs<br>Film crafting begins</div>
+    </div>
+    <div class="timeline-step">
+      <div class="timeline-dot">
+        <svg width="16" height="16" viewBox="0 0 16 16"><path d="M2 8h12M10 4l4 4-4 4"/></svg>
+      </div>
+      <div class="timeline-label">Day 3–4<br>Preview sent for approval</div>
+    </div>
+    <div class="timeline-step">
+      <div class="timeline-dot">
+        <svg width="16" height="16" viewBox="0 0 16 16"><rect x="2" y="5" width="12" height="8" rx="1"/><path d="M5 5V4a3 3 0 016 0v1"/></svg>
+      </div>
+      <div class="timeline-label">Day 5–7<br>Delivered to your door</div>
+    </div>
+  </div>
+
+  <!-- Next Steps Cards -->
+  <div class="next-steps fade-up">
+    <div class="next-card">
+      <svg class="next-icon" viewBox="0 0 36 36">
+        <path d="M6 12h24M6 18h16M6 24h20"/>
+        <rect x="2" y="6" width="32" height="24" rx="2"/>
+      </svg>
+      <h3 class="next-title">Check Your Email</h3>
+      <p class="next-desc">A full order confirmation with your receipt and production timeline has been sent to your inbox.</p>
+    </div>
+    <div class="next-card">
+      <svg class="next-icon" viewBox="0 0 36 36">
+        <rect x="6" y="4" width="24" height="28" rx="2"/>
+        <path d="M12 14h12M12 20h8"/>
+        <circle cx="22" cy="27" r="5" fill="rgba(198,169,107,0.15)" stroke="#C6A96B"/>
+        <path d="M20 27l1.5 1.5L24 25"/>
+      </svg>
+      <h3 class="next-title">We'll Send a Preview</h3>
+      <p class="next-desc">Before we ship, you'll receive a preview of your memory film to review and approve. Your satisfaction comes first.</p>
+    </div>
+    <div class="next-card">
+      <svg class="next-icon" viewBox="0 0 36 36">
+        <path d="M18 4v8M4 18h8M24 18h8M18 24v8"/>
+        <circle cx="18" cy="18" r="6"/>
+      </svg>
+      <h3 class="next-title">Share the Story</h3>
+      <p class="next-desc">Know someone with memories worth keeping? Every EverStories gift comes with a referral card inside the box.</p>
+    </div>
+  </div>
+
+  <a href="index.html" class="btn-home fade-up">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M10 7H4M6 4L3 7l3 3"/>
+    </svg>
+    Back to EverStories
+  </a>
+
+</div>
+
+<footer>
+  <p>© 2025 EverStories Inc. · Made in Canada</p>
+  <p>Questions? hello@everstories.ca</p>
+</footer>
+
+<script>
+  // Generate order number
+  const num = 'ES-2025-' + Math.floor(1000 + Math.random() * 9000);
+  document.getElementById('orderNum').textContent = num;
+
+  const params = new URLSearchParams(window.location.search);
+  const total = params.get('total');
+  if (total) {
+    document.getElementById('orderAmount').textContent = '$' + parseFloat(total).toFixed(2);
+  }
+
+  // Animate timeline dots in sequence
+  setTimeout(() => {
+    const dots = document.querySelectorAll('.timeline-dot:not(.done)');
+    dots.forEach((dot, i) => {
+      setTimeout(() => dot.style.borderColor = 'rgba(198,169,107,0.25)', i * 400 + 800);
+    });
+  }, 600);
+</script>
+
+</body>
+</html>
