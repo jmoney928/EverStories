@@ -1,59 +1,60 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 130" fill="#C6A96B">
   <!-- Trunk -->
-  <path d="M100 210 L100 140" stroke="#C6A96B" stroke-width="6" stroke-linecap="round"/>
-  <!-- Root spread -->
-  <path d="M100 210 Q80 205 65 215" stroke="#C6A96B" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-  <path d="M100 210 Q120 205 135 215" stroke="#C6A96B" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-  <path d="M100 200 Q75 198 58 206" stroke="#C6A96B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-  <path d="M100 200 Q125 198 142 206" stroke="#C6A96B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M57 128 C57 128 55 115 55 108 C55 102 53 96 51 90 C51 90 56 93 60 93 C64 93 69 90 69 90 C67 96 65 102 65 108 C65 115 63 128 63 128 Z"/>
+  <!-- Root flares -->
+  <path d="M55 120 C50 119 44 121 40 125 C44 121 50 120 55 120Z" opacity="0.7"/>
+  <path d="M65 120 C70 119 76 121 80 125 C76 121 70 120 65 120Z" opacity="0.7"/>
 
-  <!-- Main lower branches -->
-  <path d="M100 155 Q75 148 55 158" stroke="#C6A96B" stroke-width="4" stroke-linecap="round" fill="none"/>
-  <path d="M100 155 Q125 148 145 158" stroke="#C6A96B" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <!-- Main trunk up -->
+  <path d="M56 92 C54 85 50 78 46 72 C50 75 54 76 60 76 C66 76 70 75 74 72 C70 78 66 85 64 92 Z"/>
 
-  <!-- Mid branches -->
-  <path d="M100 138 Q72 128 48 140" stroke="#C6A96B" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-  <path d="M100 138 Q128 128 152 140" stroke="#C6A96B" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-  <path d="M100 130 Q85 118 72 124" stroke="#C6A96B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-  <path d="M100 130 Q115 118 128 124" stroke="#C6A96B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <!-- Left main branch -->
+  <path d="M48 74 C42 68 34 63 26 62 C28 60 34 60 38 62 C34 58 28 54 22 56 C26 54 32 53 36 56 C32 50 28 46 22 46 C28 46 34 48 36 52 C34 46 32 40 28 36 C32 42 36 44 40 50 C38 44 38 38 36 32 C38 40 42 44 44 50 C44 44 44 38 42 32 C44 40 46 44 48 52 C48 46 50 40 50 34 C50 42 50 48 50 54 C52 48 54 42 56 36 C54 44 52 50 52 58 C54 54 58 50 62 48 C58 52 56 58 54 62 C54 66 52 70 50 74 Z" opacity="0.9"/>
 
-  <!-- Upper branches -->
-  <path d="M100 118 Q68 105 42 118" stroke="#C6A96B" stroke-width="3" stroke-linecap="round" fill="none"/>
-  <path d="M100 118 Q132 105 158 118" stroke="#C6A96B" stroke-width="3" stroke-linecap="round" fill="none"/>
-  <path d="M100 108 Q78 95 62 102" stroke="#C6A96B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-  <path d="M100 108 Q122 95 138 102" stroke="#C6A96B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <!-- Right main branch -->
+  <path d="M72 74 C78 68 86 63 94 62 C92 60 86 60 82 62 C86 58 92 54 98 56 C94 54 88 53 84 56 C88 50 92 46 98 46 C92 46 86 48 84 52 C86 46 88 40 92 36 C88 42 84 44 80 50 C82 44 82 38 84 32 C82 40 78 44 76 50 C76 44 76 38 78 32 C76 40 74 44 72 52 C72 46 70 40 70 34 C70 42 70 48 70 54 C68 48 66 42 64 36 C66 44 68 50 68 58 C66 54 62 50 58 48 C62 52 64 58 66 62 C66 66 68 70 70 74 Z" opacity="0.9"/>
 
-  <!-- Top branches -->
-  <path d="M100 95 Q70 80 48 90" stroke="#C6A96B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-  <path d="M100 95 Q130 80 152 90" stroke="#C6A96B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-  <path d="M100 85 Q82 70 68 78" stroke="#C6A96B" stroke-width="2" stroke-linecap="round" fill="none"/>
-  <path d="M100 85 Q118 70 132 78" stroke="#C6A96B" stroke-width="2" stroke-linecap="round" fill="none"/>
-  <path d="M100 78 Q88 62 78 68" stroke="#C6A96B" stroke-width="2" stroke-linecap="round" fill="none"/>
-  <path d="M100 78 Q112 62 122 68" stroke="#C6A96B" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <!-- Upper centre branches -->
+  <path d="M58 60 C56 54 52 48 48 44 C50 42 54 42 56 44 C54 40 52 36 50 32 C52 34 56 36 58 40 C58 34 58 28 56 22 C58 28 60 32 62 36 C62 28 64 22 64 16 C64 22 62 28 62 34 C64 30 68 26 70 22 C68 28 66 32 64 36 C66 34 70 32 72 32 C70 36 66 38 64 42 C62 38 60 34 58 30 C60 36 60 42 60 48 Z"/>
 
-  <!-- Canopy tips - leaf clusters -->
-  <circle cx="42" cy="116" r="7" fill="#C6A96B" opacity="0.85"/>
-  <circle cx="158" cy="116" r="7" fill="#C6A96B" opacity="0.85"/>
-  <circle cx="48" cy="88" r="6" fill="#C6A96B" opacity="0.85"/>
-  <circle cx="152" cy="88" r="6" fill="#C6A96B" opacity="0.85"/>
-  <circle cx="55" cy="157" r="6" fill="#C6A96B" opacity="0.75"/>
-  <circle cx="145" cy="157" r="6" fill="#C6A96B" opacity="0.75"/>
-  <circle cx="48" cy="138" r="5.5" fill="#C6A96B" opacity="0.8"/>
-  <circle cx="152" cy="138" r="5.5" fill="#C6A96B" opacity="0.8"/>
-  <circle cx="62" cy="100" r="6" fill="#C6A96B" opacity="0.85"/>
-  <circle cx="138" cy="100" r="6" fill="#C6A96B" opacity="0.85"/>
-  <circle cx="68" cy="76" r="5.5" fill="#C6A96B" opacity="0.85"/>
-  <circle cx="132" cy="76" r="5.5" fill="#C6A96B" opacity="0.85"/>
-  <circle cx="78" cy="65" r="5" fill="#C6A96B" opacity="0.9"/>
-  <circle cx="122" cy="65" r="5" fill="#C6A96B" opacity="0.9"/>
-  <circle cx="72" cy="122" r="5" fill="#C6A96B" opacity="0.8"/>
-  <circle cx="128" cy="122" r="5" fill="#C6A96B" opacity="0.8"/>
-  <circle cx="100" cy="52" r="8" fill="#C6A96B" opacity="0.95"/>
-  <circle cx="86" cy="58" r="5.5" fill="#C6A96B" opacity="0.9"/>
-  <circle cx="114" cy="58" r="5.5" fill="#C6A96B" opacity="0.9"/>
-  <circle cx="100" cy="30" r="6" fill="#C6A96B" opacity="0.9"/>
-  <circle cx="88" cy="36" r="4.5" fill="#C6A96B" opacity="0.85"/>
-  <circle cx="112" cy="36" r="4.5" fill="#C6A96B" opacity="0.85"/>
-  <circle cx="78" cy="46" r="4" fill="#C6A96B" opacity="0.8"/>
-  <circle cx="122" cy="46" r="4" fill="#C6A96B" opacity="0.8"/>
+  <!-- Far left branch cluster -->
+  <path d="M26 62 C20 60 14 58 10 54 C14 56 20 58 24 60 Z" opacity="0.8"/>
+  <path d="M22 56 C16 52 10 48 8 42 C12 46 18 50 22 54 Z" opacity="0.75"/>
+  <path d="M22 46 C18 40 16 34 18 28 C18 34 20 40 24 44 Z" opacity="0.7"/>
+  <path d="M28 36 C26 30 28 24 32 20 C30 26 28 30 30 36 Z" opacity="0.7"/>
+  <path d="M36 32 C36 26 38 20 42 16 C40 22 38 26 38 32 Z" opacity="0.7"/>
+  <path d="M44 32 C46 26 48 20 52 16 C50 22 48 26 46 32 Z" opacity="0.75"/>
+
+  <!-- Far right branch cluster -->
+  <path d="M94 62 C100 60 106 58 110 54 C106 56 100 58 96 60 Z" opacity="0.8"/>
+  <path d="M98 56 C104 52 110 48 112 42 C108 46 102 50 98 54 Z" opacity="0.75"/>
+  <path d="M98 46 C102 40 104 34 102 28 C102 34 100 40 96 44 Z" opacity="0.7"/>
+  <path d="M92 36 C94 30 92 24 88 20 C90 26 92 30 90 36 Z" opacity="0.7"/>
+  <path d="M84 32 C84 26 82 20 78 16 C80 22 82 26 82 32 Z" opacity="0.7"/>
+  <path d="M76 32 C74 26 72 20 68 16 C70 22 72 26 74 32 Z" opacity="0.75"/>
+
+  <!-- Top canopy dots/leaves -->
+  <circle cx="60" cy="12" r="4"/>
+  <circle cx="52" cy="15" r="3"/>
+  <circle cx="68" cy="15" r="3"/>
+  <circle cx="44" cy="20" r="3"/>
+  <circle cx="76" cy="20" r="3"/>
+  <circle cx="36" cy="26" r="2.8"/>
+  <circle cx="84" cy="26" r="2.8"/>
+  <circle cx="28" cy="34" r="2.5"/>
+  <circle cx="92" cy="34" r="2.5"/>
+  <circle cx="20" cy="44" r="2.5"/>
+  <circle cx="100" cy="44" r="2.5"/>
+  <circle cx="14" cy="56" r="3"/>
+  <circle cx="106" cy="56" r="3"/>
+  <circle cx="10" cy="66" r="2.5"/>
+  <circle cx="110" cy="66" r="2.5"/>
+  <circle cx="38" cy="16" r="2.5"/>
+  <circle cx="82" cy="16" r="2.5"/>
+  <circle cx="30" cy="22" r="2.2"/>
+  <circle cx="90" cy="22" r="2.2"/>
+  <circle cx="56" cy="20" r="2.5"/>
+  <circle cx="64" cy="20" r="2.5"/>
+  <circle cx="50" cy="26" r="2.2"/>
+  <circle cx="70" cy="26" r="2.2"/>
 </svg>
