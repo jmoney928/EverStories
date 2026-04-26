@@ -457,6 +457,19 @@
     document.getElementById('orderAmount').textContent = '$' + parseFloat(total).toFixed(2);
   }
 
+  // Link Stripe session to Supabase order
+  const stripeSessionId = params.get('session_id');
+  const orderId = sessionStorage.getItem('esOrderId');
+
+  if (orderId) {
+    fetch('/api/update-order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ orderId, stripeSessionId }),
+    }).catch(console.error);
+    sessionStorage.removeItem('esOrderId');
+  }
+
   // Animate timeline dots in sequence
   setTimeout(() => {
     const dots = document.querySelectorAll('.timeline-dot:not(.done)');

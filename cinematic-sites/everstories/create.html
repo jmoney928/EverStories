@@ -1073,6 +1073,7 @@
     price: 250,
     occasion: 'Anniversary',
     photoCount: 0,
+    photoFiles: [],
   };
 
   // Pre-select from URL param
@@ -1131,9 +1132,10 @@
   function handleFiles(e) { handleFileList(e.target.files); }
 
   function handleFileList(files) {
-    state.photoCount = files.length;
+    state.photoFiles = Array.from(files).slice(0, 20);
+    state.photoCount = state.photoFiles.length;
     previews.innerHTML = '';
-    Array.from(files).slice(0, 20).forEach(file => {
+    state.photoFiles.forEach(file => {
       const reader = new FileReader();
       reader.onload = e => {
         const img = document.createElement('img');
@@ -1218,9 +1220,74 @@
     document.getElementById('summaryTax').textContent = '$' + tax.toFixed(2);
     document.getElementById('summaryTotal').textContent = '$' + total;
 
-    // Pass to checkout
-    document.getElementById('proceedBtn').href = `checkout.html?tier=${state.tier}&price=${price}&total=${total}`;
+    // Store for checkout handler
+    state.checkoutUrl = `checkout.html?tier=${state.tier}&price=${price}&total=${total}`;
+    document.getElementById('proceedBtn').href = state.checkoutUrl;
   }
+
+  // Intercept proceed button — save order to Supabase first
+  document.getElementById('proceedBtn').addEventListener('click', async e => {
+    e.preventDefault();
+
+    const btn = document.getElementById('proceedBtn');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = 'Saving your order…';
+    btn.style.pointerEvents = 'none';
+    btn.style.opacity = '0.7';
+
+    try {
+      const res = await fetch('/api/save-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          tier: state.tier,
+          occasion: state.occasion,
+          recipientName: document.getElementById('recipientName').value,
+          senderName: document.getElementById('senderName').value,
+          personalMessage: document.getElementById('giftMessage').value,
+          storyContext: document.getElementById('storyContext').value,
+          deliveryFirst: document.getElementById('shipFirst').value,
+          deliveryLast: document.getElementById('shipLast').value,
+          deliveryEmail: document.getElementById('orderEmail').value,
+          deliveryAddress: document.getElementById('shipAddress').value,
+          deliveryCity: document.getElementById('shipCity').value,
+          deliveryProvince: document.getElementById('shipProvince').value,
+          deliveryPostal: document.getElementById('shipPostal').value,
+          deliveryNote: document.getElementById('shipNote').value,
+          photoCount: state.photoCount,
+        }),
+      });
+
+      const { orderId, uploadUrls, error } = await res.json();
+      if (error) throw new Error(error);
+
+      // Upload photos to signed URLs
+      if (uploadUrls && uploadUrls.length && state.photoFiles.length) {
+        btn.innerHTML = 'Uploading photos…';
+        await Promise.all(uploadUrls.map(({ signedUrl, index }) => {
+          const file = state.photoFiles[index];
+          if (!file) return Promise.resolve();
+          return fetch(signedUrl, {
+            method: 'PUT',
+            headers: { 'Content-Type': file.type || 'image/jpeg' },
+            body: file,
+          });
+        }));
+      }
+
+      // Store order ID for thanks page
+      sessionStorage.setItem('esOrderId', orderId);
+
+      window.location.href = state.checkoutUrl + `&orderId=${orderId}`;
+
+    } catch (err) {
+      console.error(err);
+      btn.innerHTML = originalText;
+      btn.style.pointerEvents = '';
+      btn.style.opacity = '';
+      alert('Something went wrong saving your order. Please try again.');
+    }
+  });
 </script>
 </body>
 </html>
