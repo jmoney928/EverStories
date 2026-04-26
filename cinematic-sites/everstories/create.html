@@ -10,6 +10,11 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    .announcement-bar { width:100%; background:#C6A96B; color:#0B0B0C; font-family:'Outfit',sans-serif; font-size:0.75rem; font-weight:500; letter-spacing:0.06em; text-align:center; padding:0.6rem 3rem; position:relative; z-index:200; }
+    .announcement-bar span { opacity:0.7; margin:0 0.75rem; }
+    .announcement-dismiss { position:absolute; right:1rem; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; color:#0B0B0C; opacity:0.5; padding:0.25rem; line-height:1; font-size:1rem; }
+    .announcement-dismiss:hover { opacity:1; }
+
     :root {
       --black: #0B0B0C;
       --ivory: #F5F1E8;
@@ -607,6 +612,12 @@
 </head>
 <body>
 
+<div class="announcement-bar" id="announcementBar">
+  Due to high demand, we are currently backed up on orders — estimated wait time is <strong>6 weeks</strong>.
+  <span>·</span> We appreciate your patience.
+  <button class="announcement-dismiss" onclick="document.getElementById('announcementBar').style.display='none'" aria-label="Dismiss">✕</button>
+</div>
+
 <nav>
   <a href="index.html" class="nav-logo">
     <img src="assets/Logo.png" alt="EverStories">
@@ -670,23 +681,23 @@
         <span class="tier-badge">Entry</span>
         <h3 class="tier-name">Story Card</h3>
         <div class="tier-price">$150</div>
-        <p class="tier-desc">A premium printed card with QR code — scan to watch your living memory film on any device.</p>
+        <p class="tier-desc">A personalized memory film delivered via QR code on a premium 5×7 card — presented in a matte black envelope with gold seal.</p>
         <ul class="tier-features">
           <li>
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
-            Memory film up to 60 seconds
+            Memories Film on QR Code (60 seconds)
           </li>
           <li>
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
-            Luxury matte black printed card
+            5×7 Premium Card
           </li>
           <li>
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
-            Gold foil EverStories envelope
+            Matte Black Envelope with Gold Seal
           </li>
           <li>
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
-            Permanent hosted memory link
+            Personal Message
           </li>
         </ul>
       </div>
@@ -700,31 +711,31 @@
         <span class="tier-badge">Most Popular</span>
         <h3 class="tier-name">Keepsake Collection</h3>
         <div class="tier-price">$250</div>
-        <p class="tier-desc">The complete experience. Memory film pre-loaded on a digital frame, presented in our signature keepsake box.</p>
+        <p class="tier-desc">Everything in the Story Card, plus a luxury keepsake box and an authentic black leather mini photo album — a gift they'll return to for years.</p>
         <ul class="tier-features">
           <li>
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
-            Memory film up to 90 seconds
+            Memories Film (90 seconds)
           </li>
           <li>
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
-            Luxury matte black printed card
+            5×7 Premium Card
           </li>
           <li>
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
-            Gold foil EverStories envelope
+            Matte Black Envelope with Gold Seal
           </li>
           <li>
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
-            Permanent hosted memory link
+            Personal Message
           </li>
           <li>
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
-            Luxury keepsake box, black velvet interior
+            Luxury Keepsake Box
           </li>
           <li>
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
-            Handwritten gift card + free shipping
+            Authentic Black Leather Mini Photo Album
           </li>
         </ul>
       </div>
@@ -738,23 +749,35 @@
         <span class="tier-badge">Premium</span>
         <h3 class="tier-name">Living Story Frame</h3>
         <div class="tier-price">$350</div>
-        <p class="tier-desc">Our most complete gift. Large gallery-format frame, extended memory film, engraved nameplate, and white glove delivery.</p>
+        <p class="tier-desc">Our most complete gift. A preloaded 10×12 digital frame, luxury keepsake box, leather photo album, and USB-C backup — everything needed to display the memory for a lifetime.</p>
         <ul class="tier-features">
           <li>
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
-            Memory film up to 90 seconds
+            5×7 Premium Card
           </li>
           <li>
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
-            Pre-loaded digital picture frame
+            Personal Message
           </li>
           <li>
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
-            Luxury keepsake box, black velvet interior
+            Luxury Keepsake Box
           </li>
           <li>
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
-            Handwritten gift card + free shipping
+            Authentic Black Leather Mini Photo Album
+          </li>
+          <li>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
+            10×12 Digital Frame — Preloaded with Memories Film (up to 3 minutes)
+          </li>
+          <li>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
+            USB-C Backup
+          </li>
+          <li>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#C6A96B" stroke-width="1.5"><path d="M2 6l3 3 5-5"/></svg>
+            Power Cable (Plug &amp; Play)
           </li>
         </ul>
       </div>

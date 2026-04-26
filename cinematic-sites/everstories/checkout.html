@@ -10,6 +10,11 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    .announcement-bar { width:100%; background:#C6A96B; color:#0B0B0C; font-family:'Outfit',sans-serif; font-size:0.75rem; font-weight:500; letter-spacing:0.06em; text-align:center; padding:0.6rem 3rem; position:relative; z-index:200; }
+    .announcement-bar span { opacity:0.7; margin:0 0.75rem; }
+    .announcement-dismiss { position:absolute; right:1rem; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; color:#0B0B0C; opacity:0.5; padding:0.25rem; line-height:1; font-size:1rem; }
+    .announcement-dismiss:hover { opacity:1; }
+
     :root {
       --black: #0B0B0C;
       --ivory: #F5F1E8;
@@ -466,6 +471,12 @@
 </head>
 <body>
 
+<div class="announcement-bar" id="announcementBar">
+  Due to high demand, we are currently backed up on orders — estimated wait time is <strong>6 weeks</strong>.
+  <span>·</span> We appreciate your patience.
+  <button class="announcement-dismiss" onclick="document.getElementById('announcementBar').style.display='none'" aria-label="Dismiss">✕</button>
+</div>
+
 <nav>
   <a href="index.html" class="nav-logo">
     <img src="assets/Logo.png" alt="EverStories">
@@ -487,94 +498,18 @@
     <p class="section-label">Final Step</p>
     <h1 class="section-title">Secure Payment</h1>
 
-    <!-- Express Pay -->
-    <div class="express-pay">
-      <button class="pay-btn" onclick="handleExpressPay('apple')">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
-          <path d="M14.5 9.5c0-2.2 1.8-3.3 1.9-3.3-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-2.9-.7-1.5 0-2.9.9-3.6 2.2-1.5 2.7-.4 6.6 1.1 8.8.7 1 1.5 2.2 2.7 2.1 1.1 0 1.5-.7 2.8-.7 1.3 0 1.7.7 2.8.7 1.1 0 1.9-1 2.6-2 .8-1.1 1.1-2.2 1.1-2.3-.1 0-2.1-.8-2.1-3.1zM11.6 3.3C12.2 2.6 12.6 1.6 12.5.5c-.9.1-2 .6-2.7 1.3-.6.6-1.1 1.6-1 2.6 1 .1 1.9-.4 2.8-1.1z"/>
-        </svg>
-        Apple Pay
-      </button>
-      <button class="pay-btn" onclick="handleExpressPay('google')">
-        <svg width="18" height="18" viewBox="0 0 18 18">
-          <path fill="#4285F4" d="M17.5 9.2c0-.6-.1-1.2-.2-1.7H9v3.3h4.8c-.2 1.1-.8 2-1.8 2.6v2.1h2.9c1.7-1.6 2.6-3.9 2.6-6.3z"/>
-          <path fill="#34A853" d="M9 18c2.4 0 4.5-.8 6-2.2l-2.9-2.1c-.8.5-1.9.9-3.1.9-2.4 0-4.4-1.6-5.1-3.8H.9v2.2C2.4 16 5.5 18 9 18z"/>
-          <path fill="#FBBC05" d="M3.9 10.8C3.7 10.2 3.6 9.6 3.6 9s.1-1.2.3-1.8V5H.9C.3 6.2 0 7.6 0 9s.3 2.8.9 4l3-2.2z"/>
-          <path fill="#EA4335" d="M9 3.6c1.3 0 2.5.5 3.4 1.3l2.5-2.5C13.5.9 11.4 0 9 0 5.5 0 2.4 2 .9 5L3.9 7.2C4.6 5 6.6 3.6 9 3.6z"/>
-        </svg>
-        Google Pay
-      </button>
-    </div>
+    <p style="font-size:0.88rem;color:rgba(245,241,232,0.5);line-height:1.75;margin-bottom:2.5rem;">
+      You'll be taken to Stripe's secure checkout to complete your payment. Card details, Apple Pay, and Google Pay are all accepted. You'll be brought right back when done.
+    </p>
 
-    <div class="divider"><span>or pay with card</span></div>
-
-    <!-- Contact -->
+    <!-- Email -->
     <div class="form-section">
       <p class="form-section-title">Contact</p>
       <div class="form-grid">
         <div class="field full">
           <label>Email Address</label>
           <input type="email" id="email" placeholder="you@email.com">
-        </div>
-      </div>
-    </div>
-
-    <!-- Card Details -->
-    <div class="form-section">
-      <p class="form-section-title">Card Details</p>
-      <div class="form-grid">
-        <div class="field full card-field">
-          <label>Card Number</label>
-          <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)">
-          <div class="card-icons">
-            <div class="card-icon visa">VISA</div>
-            <div class="card-icon mc">MC</div>
-          </div>
-        </div>
-        <div class="field">
-          <label>Expiry Date</label>
-          <input type="text" id="cardExpiry" placeholder="MM / YY" maxlength="7" oninput="formatExpiry(this)">
-        </div>
-        <div class="field">
-          <label>CVC</label>
-          <input type="text" id="cardCvc" placeholder="123" maxlength="4">
-        </div>
-        <div class="field full">
-          <label>Name on Card</label>
-          <input type="text" id="cardName" placeholder="Margaret O'Brien">
-        </div>
-      </div>
-    </div>
-
-    <!-- Billing -->
-    <div class="form-section">
-      <p class="form-section-title">Billing Address</p>
-      <div class="form-grid">
-        <div class="field full">
-          <label>Street Address</label>
-          <input type="text" id="billAddress" placeholder="123 Elm Street">
-        </div>
-        <div class="field">
-          <label>City</label>
-          <input type="text" id="billCity" placeholder="Ottawa">
-        </div>
-        <div class="field">
-          <label>Province</label>
-          <select id="billProvince">
-            <option value="">Province</option>
-            <option>Ontario</option>
-            <option>British Columbia</option>
-            <option>Quebec</option>
-            <option>Alberta</option>
-            <option>Manitoba</option>
-            <option>Saskatchewan</option>
-            <option>Nova Scotia</option>
-            <option>New Brunswick</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>Postal Code</label>
-          <input type="text" id="billPostal" placeholder="K1A 0A9">
+          <span style="font-size:0.72rem;color:rgba(245,241,232,0.3);margin-top:0.4rem;display:block;">Your order confirmation will be sent here.</span>
         </div>
       </div>
     </div>
@@ -585,13 +520,13 @@
         <path d="M1 8h14"/>
         <path d="M5 3V2a1 1 0 011-1h4a1 1 0 011 1v1"/>
       </svg>
-      Complete Order · <span id="payTotal">$282.50</span>
+      <span id="payBtnText">Pay Securely · <span id="payTotal">$250.00</span></span>
     </button>
 
     <div class="trust-row">
       <div class="trust-item">
         <svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 1l4 2v4c0 2.5-2 4-4 5-2-1-4-2.5-4-5V3z"/></svg>
-        SSL Encrypted
+        Powered by Stripe
       </div>
       <div class="trust-item">
         <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/><circle cx="6" cy="6" r="5"/></svg>
@@ -689,44 +624,41 @@
   document.getElementById('lineShipping').textContent = shipping === 0 ? 'Free' : '$' + shipping.toFixed(2);
   document.getElementById('lineTax').textContent = '$' + tax.toFixed(2);
   document.getElementById('lineTotal').textContent = '$' + total.toFixed(2);
-  document.getElementById('payTotal').textContent = '$' + total.toFixed(2);
+  document.getElementById('payTotal').textContent = '$' + price.toFixed(2);
 
-  // Card formatting
-  function formatCard(input) {
-    let val = input.value.replace(/\D/g, '').substring(0, 16);
-    input.value = val.replace(/(.{4})/g, '$1 ').trim();
-  }
-
-  function formatExpiry(input) {
-    let val = input.value.replace(/\D/g, '').substring(0, 4);
-    if (val.length >= 2) val = val.substring(0, 2) + ' / ' + val.substring(2);
-    input.value = val;
-  }
-
-  // Express pay
-  function handleExpressPay(type) {
-    const btn = event.currentTarget;
-    btn.textContent = 'Processing...';
-    btn.disabled = true;
-    setTimeout(() => window.location.href = 'thanks.html?tier=' + tier + '&total=' + total, 1800);
-  }
-
-  // Card pay
-  function handlePay() {
-    const email = document.getElementById('email').value;
-    const card = document.getElementById('cardNumber').value;
-    const name = document.getElementById('cardName').value;
-
-    if (!email || !card || !name) {
-      alert('Please fill in all required fields.');
+  async function handlePay() {
+    const email = document.getElementById('email').value.trim();
+    if (!email) {
+      document.getElementById('email').focus();
+      document.getElementById('email').style.borderColor = '#c0392b';
       return;
     }
 
     const btn = document.getElementById('payBtn');
-    btn.classList.add('loading');
-    btn.textContent = 'Processing...';
+    btn.disabled = true;
+    document.getElementById('payBtnText').textContent = 'Redirecting to Stripe...';
 
-    setTimeout(() => window.location.href = 'thanks.html?tier=' + tier + '&total=' + total, 2200);
+    try {
+      const res = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tier, email }),
+      });
+
+      const data = await res.json();
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert('Something went wrong: ' + (data.error || 'Unknown error'));
+        btn.disabled = false;
+        document.getElementById('payBtnText').innerHTML = 'Pay Securely · <span id="payTotal">$' + price.toFixed(2) + '</span>';
+      }
+    } catch (err) {
+      alert('Could not connect to payment server. Please try again.');
+      btn.disabled = false;
+      document.getElementById('payBtnText').innerHTML = 'Pay Securely · <span id="payTotal">$' + price.toFixed(2) + '</span>';
+    }
   }
 </script>
 </body>

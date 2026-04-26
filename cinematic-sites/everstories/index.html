@@ -10,6 +10,39 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    .announcement-bar {
+      width: 100%;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-align: center;
+      padding: 0.6rem 3rem;
+      position: relative;
+      z-index: 200;
+    }
+
+    .announcement-bar span { opacity: 0.7; margin: 0 0.75rem; }
+
+    .announcement-dismiss {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--black);
+      opacity: 0.5;
+      padding: 0.25rem;
+      line-height: 1;
+      font-size: 1rem;
+    }
+
+    .announcement-dismiss:hover { opacity: 1; }
+
     :root {
       --black: #0B0B0C;
       --ivory: #F5F1E8;
@@ -388,15 +421,31 @@
 
     .products-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 1px;
       background: rgba(198,169,107,0.1);
+    }
+
+    .product-img-wrap {
+      width: 100%;
+      aspect-ratio: 9 / 14;
+      overflow: hidden;
+      display: block;
+      margin-bottom: 2rem;
+    }
+
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
     }
 
     .product-card {
       position: relative;
       background: #0B0B0C;
-      padding: 3rem 2.5rem 3.5rem;
+      padding: 2.5rem 2.5rem 3.5rem;
       cursor: pointer;
       overflow: hidden;
       transition: background 0.3s;
@@ -418,7 +467,7 @@
 
     .product-card.featured {
       grid-row: span 1;
-      padding: 3.5rem 3rem 4rem;
+      padding: 2.5rem 2.5rem 3.5rem;
     }
 
     .product-badge {
@@ -441,7 +490,7 @@
       letter-spacing: 0.01em;
     }
 
-    .product-card.featured .product-name { font-size: 2.4rem; }
+    .product-card.featured .product-name { font-size: 1.9rem; }
 
     .product-price {
       font-family: 'Cormorant Garamond', serif;
@@ -452,7 +501,7 @@
       line-height: 1;
     }
 
-    .product-card.featured .product-price { font-size: 3.5rem; }
+    .product-card.featured .product-price { font-size: 2.8rem; }
 
     .product-desc {
       font-size: 0.85rem;
@@ -734,6 +783,58 @@
     .reveal.visible { opacity: 1; transform: none; }
 
     /* ── RESPONSIVE ── */
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(11,11,12,0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      padding: 2rem;
+    }
+
+    #lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    #lightboxImg {
+      max-height: 90vh;
+      max-width: 90vw;
+      object-fit: contain;
+      transform: scale(0.92);
+      transition: transform 0.3s ease;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+    }
+
+    #lightbox.open #lightboxImg {
+      transform: scale(1);
+    }
+
+    #lightboxClose {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(245,241,232,0.08);
+      border: 1px solid rgba(245,241,232,0.15);
+      color: var(--ivory);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    #lightboxClose:hover { background: rgba(245,241,232,0.15); }
+
     @media (max-width: 768px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
@@ -756,6 +857,12 @@
 <body>
 
 <!-- ── NAV ── -->
+<div class="announcement-bar" id="announcementBar">
+  Due to high demand, we are currently backed up on orders — estimated wait time is <strong>6 weeks</strong>.
+  <span>·</span> We appreciate your patience.
+  <button class="announcement-dismiss" onclick="document.getElementById('announcementBar').style.display='none'" aria-label="Dismiss">✕</button>
+</div>
+
 <nav>
   <a href="/" class="nav-logo">
     <img src="assets/Logo.png" alt="EverStories tree of life logo">
@@ -880,46 +987,47 @@
 
       <!-- Featured: Keepsake Collection -->
       <div class="product-card featured" data-card>
+        <div class="product-img-wrap"><img src="assets/keepsake.jpg" alt="Keepsake Collection" class="product-img"></div>
         <span class="product-badge">Most Popular</span>
         <h3 class="product-name">Keepsake Collection</h3>
         <div class="product-price">$250</div>
-        <p class="product-desc">The complete memory gift experience. A memory film delivered on a luxury digital frame, presented inside our signature matte black velvet-lined keepsake box.</p>
+        <p class="product-desc">Everything in the Story Card, plus a luxury keepsake box and an authentic black leather mini photo album — a gift they'll return to for years.</p>
         <ul class="product-features">
           <li>
             <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
               <path d="M2 7l3.5 3.5L12 3"/>
             </svg>
-            Memory film up to 90 seconds
+            Memories Film (90 seconds)
           </li>
           <li>
             <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
               <path d="M2 7l3.5 3.5L12 3"/>
             </svg>
-            Luxury matte black printed card
+            5×7 Premium Card
           </li>
           <li>
             <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
               <path d="M2 7l3.5 3.5L12 3"/>
             </svg>
-            Gold foil EverStories envelope
+            Matte Black Envelope with Gold Seal
           </li>
           <li>
             <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
               <path d="M2 7l3.5 3.5L12 3"/>
             </svg>
-            Permanent hosted memory link
+            Personal Message
           </li>
           <li>
             <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
               <path d="M2 7l3.5 3.5L12 3"/>
             </svg>
-            Luxury keepsake box, black velvet interior
+            Luxury Keepsake Box
           </li>
           <li>
             <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
               <path d="M2 7l3.5 3.5L12 3"/>
             </svg>
-            Handwritten gift card + free shipping
+            Authentic Black Leather Mini Photo Album
           </li>
         </ul>
         <a href="create.html?tier=keepsake" class="btn-product">
@@ -932,34 +1040,35 @@
 
       <!-- Story Card -->
       <div class="product-card" data-card>
+        <div class="product-img-wrap"><img src="assets/card.jpg" alt="Story Card" class="product-img"></div>
         <span class="product-badge">Entry</span>
         <h3 class="product-name">Story Card</h3>
         <div class="product-price">$150</div>
-        <p class="product-desc">A premium printed memory card with an embedded QR code. Scan to watch the living memory film on any device — a gift that never stops giving.</p>
+        <p class="product-desc">A personalized memory film delivered via QR code on a premium 5×7 card — presented in a matte black envelope with gold seal.</p>
         <ul class="product-features">
           <li>
             <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
               <path d="M2 7l3.5 3.5L12 3"/>
             </svg>
-            Memory film up to 60 seconds
+            Memories Film on QR Code (60 seconds)
           </li>
           <li>
             <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
               <path d="M2 7l3.5 3.5L12 3"/>
             </svg>
-            Luxury matte black printed card
+            5×7 Premium Card
           </li>
           <li>
             <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
               <path d="M2 7l3.5 3.5L12 3"/>
             </svg>
-            Gold foil EverStories envelope
+            Matte Black Envelope with Gold Seal
           </li>
           <li>
             <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
               <path d="M2 7l3.5 3.5L12 3"/>
             </svg>
-            Permanent hosted memory link
+            Personal Message
           </li>
         </ul>
         <a href="create.html?tier=card" class="btn-product">Choose This Gift</a>
@@ -967,34 +1076,53 @@
 
       <!-- Living Story Frame -->
       <div class="product-card" data-card>
+        <div class="product-img-wrap"><img src="assets/frame.jpg" alt="Living Story Frame" class="product-img"></div>
         <span class="product-badge">Premium</span>
         <h3 class="product-name">Living Story Frame</h3>
         <div class="product-price">$350</div>
-        <p class="product-desc">Our most complete offering. Everything in the Keepsake Collection plus a larger gallery-sized frame and extended memory film — a permanent piece for the home.</p>
+        <p class="product-desc">Our most complete gift. A preloaded 10×12 digital frame, luxury keepsake box, leather photo album, and USB-C backup — everything needed to display the memory for a lifetime.</p>
         <ul class="product-features">
           <li>
             <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
               <path d="M2 7l3.5 3.5L12 3"/>
             </svg>
-            Memory film up to 90 seconds
+            5×7 Premium Card
           </li>
           <li>
             <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
               <path d="M2 7l3.5 3.5L12 3"/>
             </svg>
-            Pre-loaded digital picture frame
+            Personal Message
           </li>
           <li>
             <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
               <path d="M2 7l3.5 3.5L12 3"/>
             </svg>
-            Luxury keepsake box, black velvet interior
+            Luxury Keepsake Box
           </li>
           <li>
             <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
               <path d="M2 7l3.5 3.5L12 3"/>
             </svg>
-            Handwritten gift card + free shipping
+            Authentic Black Leather Mini Photo Album
+          </li>
+          <li>
+            <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
+              <path d="M2 7l3.5 3.5L12 3"/>
+            </svg>
+            10×12 Digital Frame — Preloaded with Memories Film (up to 3 minutes)
+          </li>
+          <li>
+            <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
+              <path d="M2 7l3.5 3.5L12 3"/>
+            </svg>
+            USB-C Backup
+          </li>
+          <li>
+            <svg class="feature-tick" viewBox="0 0 14 14" fill="none" stroke="#C6A96B" stroke-width="1.5">
+              <path d="M2 7l3.5 3.5L12 3"/>
+            </svg>
+            Power Cable (Plug &amp; Play)
           </li>
         </ul>
         <a href="create.html?tier=frame" class="btn-product">Choose This Gift</a>
@@ -1247,7 +1375,49 @@
   }, { threshold: 0.15 });
 
   revealEls.forEach(el => observer.observe(el));
+
+  // ── LIGHTBOX ──
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+
+  document.querySelectorAll('.product-img-wrap').forEach(wrap => {
+    wrap.style.cursor = 'zoom-in';
+    wrap.addEventListener('click', e => {
+      e.stopPropagation();
+      lightboxImg.src = wrap.querySelector('img').src;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  lightbox.addEventListener('click', () => {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+
+  document.getElementById('lightboxClose').addEventListener('click', e => {
+    e.stopPropagation();
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
 </script>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <img id="lightboxImg" src="" alt="">
+  <button id="lightboxClose">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M2 2l14 14M16 2L2 16"/>
+    </svg>
+  </button>
+</div>
 
 </body>
 </html>
